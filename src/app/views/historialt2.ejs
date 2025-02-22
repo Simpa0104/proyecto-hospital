@@ -1,0 +1,80 @@
+<%- include('../includes/head.ejs') %>
+
+    <title>Historial Test 2</title>
+
+    <body>
+        <div class="container-2">
+
+            <p class="centrado">
+                <img src="resources/imagenes/Logo.png"><br>
+            </p>
+
+            <p class="centrado-t">
+                Resultados Test 2
+            </p>
+
+            <div class="row">
+                <div>
+                    <table class="table table-bordered table-hover" style="text-align: center;">
+                        <thead>
+                            <tr>
+                                <th class="titulo">Id</th>
+                                <th class="titulo">Nombre Completo</th>
+                                <th class="titulo">Episodio</th>
+                                <th class="titulo">Riesgo</th>
+                                <th class="titulo">Fecha y Hora</th>
+                                <th class="titulo">Eliminar Todos los Datos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let i=0; i < test2.length; i++ ){ %>
+                                <tr>
+                                    <td>
+                                        <%= test2[i].idtest2 %>
+                                    </td>
+                                    <td>
+                                        <%= test2[i].nombre_completo %>
+                                    </td>
+                                    <td>
+                                        <%= test2[i].episodio %>
+                                    </td>
+                                    <td>
+                                        <%= test2[i].riesgo_form2 %>
+                                    </td>
+                                    <td>
+                                        <%= test2[i].FechaHora2%>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <a class="mr-1 btn btn-danger"
+                                                href="/deleteHistorial2/<%=test2[i].idtest2%>"
+                                                onclick="javascript:return Confirmacion();"><i class="fas fa-trash-alt"
+                                                    id="eliminar"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                        <% } %>
+                    </table>
+
+                    <a href="/Historial_Test1"
+                        class="btn btn-outline-dark flex-grow-1 text-decoration-none volver">Historial test 1</a>
+                    <br><br>
+
+                    <a href="/Riesgo_alto" class="btn btn-outline-dark flex-grow-1 text-decoration-none volver">Volver
+                        al test</a> <br>
+
+                </div>
+            </div>
+        </div><br>
+
+        <script>
+            function Confirmacion() {
+                rc = confirm("¿Esta seguro que desea eliminar todos los registros de la base de datos?");
+                return rc;
+            }
+        </script>
+
+    </body>
+
+    <%- include('../includes/footer.ejs') %>

@@ -1,0 +1,77 @@
+<%- include('../includes/head.ejs') %>
+
+    <title>Historial Test 1</title>
+
+    <body>
+
+        <p class="centrado">
+            <img src="resources/imagenes/Logo.png"><br>
+        </p>
+
+        <p class="centrado-t">
+            Resultados Test 1
+        </p>
+
+        <div class="row">
+            <div>
+                <table class="table table-bordered table-hover" style="text-align: center;" id="example">
+                    <thead>
+                        <tr>
+                            <th class="titulo">Id</th>
+                            <th class="titulo">Nombre Completo</th>
+                            <th class="titulo">Episodio</th>
+                            <th class="titulo">Riesgo</th>
+                            <th class="titulo">Fecha y Hora</th>
+                            <th class="titulo">Eliminar Datos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(let i=0; i < test1.length; i++ ){ %>
+                            <tr>
+                                <td>
+                                    <%= test1[i].idtest1 %>
+                                </td>
+                                <td>
+                                    <%= test1[i].nombre_completo %>
+                                </td>
+                                <td>
+                                    <%= test1[i].episodio %>
+                                </td>
+                                <td>
+                                    <%= test1[i].riesgo_form1 %>
+                                </td>
+                                <td>
+                                    <%= test1[i].FechaHora1%>
+                                </td>
+                                <td>
+                                    <div>
+                                        <a class="mr-1 btn btn-danger" href="/deleteHistorial1/<%=test1[i].idtest1%>"
+                                            onclick="javascript:return asegurar();"><i class="fas fa-trash-alt"
+                                                id="eliminar"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% } %>
+
+                    </tbody>
+                </table><br>
+
+                <a href="/Historial_Test2"
+                    class="btn btn-outline-dark flex-grow-1 text-decoration-none volver">Historial test
+                    2</a><br><br>
+
+                <a href="/Riesgo_alto" class="btn btn-outline-dark flex-grow-1 text-decoration-none volver">Volver
+                    al test</a><br><br>
+
+            </div>
+
+            <script>
+                function asegurar() {
+                    rc = confirm("¿Esta seguro que desea eliminar todos los registros de la base de datos?");
+                    return rc;
+                }
+            </script>
+
+    </body>
+
+    <%- include('../includes/footer.ejs') %>
