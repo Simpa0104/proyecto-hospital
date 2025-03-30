@@ -5,6 +5,36 @@ const { body, validationResult } = require('express-validator');
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 
+////////////////////////////////////////
+
+
+// Cambia las respuestas render a json para React
+router.get('/api/historial', async (req, res) => {
+    try {
+        const [resultados] = await executeQuery(`
+        SELECT t1.*, 
+        GROUP_CONCAT(CONCAT_WS('|', t2.nivel_psicologico, t2.nivel_biologico, t2.nivel_social)) AS detalles
+        FROM test_1 t1
+        LEFT JOIN test_2 t2 ON t1.idtest1 = t2.idtest1
+        GROUP BY t1.idtest1
+      `);
+
+        const test1 = resultados.map(r => ({
+            ...r,
+            detalles: r.detalles ? r.detalles.split(',').map(d => {
+                const [psico, bio, social] = d.split('|');
+                return { psico, bio, social };
+            }) : []
+        }));
+
+        res.json(test1);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
+///////////////////////////////////////
 // Helper para ejecutar consultas SQL seguras (para queries simples)
 const executeQuery = (sql, values = []) => {
     return new Promise((resolve, reject) => {

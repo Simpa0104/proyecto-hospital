@@ -1,24 +1,25 @@
 {
-  "name": "carpeta_de_steven_no_borrar_intento_3",
+  "name": "proyecto-hospital",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sistema de Evaluación de Riesgos en Hospitales",
+  "homepage": "https://github.com/Simpa0104/proyecto-hospital#readme",
+  "bugs": {
+    "url": "https://github.com/Simpa0104/proyecto-hospital/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Simpa0104/proyecto-hospital.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "format": "prettier --write ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Simpa0104/Test_riesgo.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Simpa0104/Test_riesgo/issues"
-  },
-  "homepage": "https://github.com/Simpa0104/Test_riesgo#readme",
   "dependencies": {
     "cookie-parser": "^1.4.7",
     "csurf": "^1.10.0",
