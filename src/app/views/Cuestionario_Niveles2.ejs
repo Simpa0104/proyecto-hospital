@@ -1,114 +1,63 @@
 <%- include('../includes/head.ejs') %>
-    <title>Test de Riesgo</title>
-    </head>
+<title>Test de Riesgo - Nivel 2</title>
+</head>
+<body>
+    <%- include('../includes/contacto.ejs') %>
 
-    <body>
-        <div class="contact-wrap">
-            <div class="contact-in">
-                <img src="/imagenes/Logo.png" class="imagen">
-                <h1 class="display-4 fw-bold">Atención al usuario</h1>
-                <h2 class="display-4 fw-bold"><i class="fa fa-phone" aria-hidden="true"></i> Teléfono Medellín:</h2>
-                <p class="display-4 fw-bold">(604) 4441333</p>
-                <h2 class="display-4 fw-bold"><i class="fa fa-map-marker" aria-hidden="true"></i> Dirección:</h2>
-                <p class="display-4 fw-bold">Calle 64 # 51 D - 154</p>
-                <ul>
-                    <li><a href="https://www.facebook.com/sanvicentefundacion" target="_blank"><i class="fa fa-facebook"
-                                aria-hidden="true"></i></a></li>
-                    <li><a href="https://www.instagram.com/sanvicentefundacion/" target="_blank"><i
-                                class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                    <li><a href="https://twitter.com/sanvicentefund" target="_blank"><i class="fa fa-twitter"
-                                aria-hidden="true"></i></a></li>
-                    <li><a href="https://www.youtube.com/user/sanvicentefundacion" target="_blank"><i
-                                class="fa fa-youtube" aria-hidden="true"></i></a></li>
-                    <li><a href="https://co.linkedin.com/company/sanvicentefundacion" target="_blank"><i
-                                class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                </ul> <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form id="testForm" method="POST" action="/formulario2/<%= evaluacionId %>">
+                    <h1 class="text-center mb-4">Detección de Riesgo - Nivel 2</h1>
 
-                <h2 class="display-4 fw-bold">PARA RECORDAR</h2>
-                <p class="display-4 fw-bold">Al realizar este test estará aceptando el consentimiento de
-                    confidencialidad. Toda la información proporcionada no será divulgada.</p>
-                <a href="/Historial" class="btn btn-outline-dark text-decoration-none">Historial</a>
-            </div>
+                    <% const preguntas2 = [
+                        { num: 7, texto: "Ansiedad o ánimo deprimido" },
+                        { num: 8, texto: "Adherencia a tratamientos" },
+                        { num: 9, texto: "Hospitalizaciones recientes" },
+                        { num: 10, texto: "Autorización de asegurador" },
+                        { num: 11, texto: "Lugar y apoyo post-egreso" },
+                        { num: 12, texto: "Acompañante durante hospitalización" }
+                    ]; %>
 
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <form id="testForm" method="POST" action="/formulario1" class="needs-validation" novalidate>
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                            <h1 class="text-center mb-4">Detección de Riesgo</h1>
-
-                            <div class="mb-3">
-                                <label class="form-label">Nombre completo</label>
-                                <input type="text" class="form-control" name="nombre" required>
-                                <div class="invalid-feedback">Nombre inválido (3-50 caracteres)</div>
+                    <% preguntas2.forEach(p => { %>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Pregunta <%= p.num %></h5>
+                                <p class="card-text"><%= p.texto %></p>
+                                <div class="btn-group w-100">
+                                    <input type="radio" name="pregunta<%= p.num %>" id="p<%= p.num %>-siempre" value="2" required>
+                                    <label class="btn btn-outline-success" for="p<%= p.num %>-siempre">Siempre</label>
+                                    <input type="radio" name="pregunta<%= p.num %>" id="p<%= p.num %>-ocasional" value="1" required>
+                                    <label class="btn btn-outline-warning" for="p<%= p.num %>-ocasional">Ocasional</label>
+                                    <input type="radio" name="pregunta<%= p.num %>" id="p<%= p.num %>-nunca" value="0" required>
+                                    <label class="btn btn-outline-danger" for="p<%= p.num %>-nunca">Nunca</label>
+                                </div>
                             </div>
+                        </div>
+                    <% }); %>
 
-                            <div class="mb-4">
-                                <label class="form-label">Número de episodio</label>
-                                <input type="number" class="form-control" name="episodio" min="1" max="999999" required>
-                                <div class="invalid-feedback">Episodio inválido (1-999999)</div>
-                            </div>
-
-                            <% const preguntas=[ { num: 1, texto: "Niños/adolescentes en situación de vulnerabilidad" ,
-                                tipo: "Psicosocial" }, { num: 2, texto: "Gestantes en situación especial" ,
-                                tipo: "Psicosocial" }, { num: 3, texto: "Pacientes de oncología" , tipo: "Biosocial" },
-                                { num: 4, texto: "Pacientes con quemaduras graves" , tipo: "Biosocial" }, { num: 5,
-                                texto: "Pacientes en cuidado crítico" , tipo: "Biosocial" }, { num: 6,
-                                texto: "Patología mental" , tipo: "Psicosocial" } ]; %>
-
-                                <% preguntas.forEach(p=> { %>
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Pregunta <%= p.num %>
-                                            </h5>
-                                            <p class="card-text">
-                                                <%= p.texto %>
-                                            </p>
-                                            <div class="btn-group w-100" role="group" data-pregunta="<%= p.num %>">
-                                                <input type="radio" class="btn-check" name="pregunta<%= p.num %>"
-                                                    id="p<%= p.num %>-si" value="1" required>
-                                                <label class="btn btn-outline-success" for="p<%= p.num %>-si">Sí</label>
-                                                <input type="radio" class="btn-check" name="pregunta<%= p.num %>"
-                                                    id="p<%= p.num %>-no" value="0" required>
-                                                <label class="btn btn-outline-danger" for="p<%= p.num %>-no">No</label>
-                                            </div>
-                                            <div class="invalid-feedback d-block" data-error-pregunta="<%= p.num %>">
-                                                Debes seleccionar una opción.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% }); %>
-
-                                        <button type="submit" class="btn btn-primary btn-lg w-100">
-                                            <i class="fas fa-shield-alt"></i> Evaluar
-                                        </button>
-                        </form>
-                    </div>
-                </div>
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        Finalizar Evaluación
+                    </button>
+                </form>
             </div>
+        </div>
+    </div>
 
-            <script>
-                document.getElementById('testForm').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    try {
-                        const formData = new URLSearchParams(new FormData(e.target));
-                        const response = await fetch(e.target.action, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                            body: formData
-                        });
-                        const data = await response.json();
-                        if (data.success) {
-                            window.location.href = data.test2Url;
-                        } else {
-                            console.error('Error en el envío del formulario:', data.errors || data.error);
-                            alert('Error en el envío del formulario');
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
-                        alert('Error al procesar el formulario');
-                    }
-                });
-            </script>
+    <script>
+        document.getElementById('testForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const response = await fetch(e.target.action, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(e.target))
+            });
+            const data = await response.json();
+            if (data.success) window.location.href = data.nextUrl;
+            else alert('Error: ' + (data.error || 'Error desconocido'));
+        });
+    </script>
 
-            <%- include('../includes/footer.ejs') %>
+    <%- include('../includes/footer.ejs') %>
+</body>
+</html>
