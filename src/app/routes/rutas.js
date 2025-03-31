@@ -1,196 +1,119 @@
 const express = require('express');
 const router = express.Router();
-const connection = require("../../config/db");
 const { body, validationResult } = require('express-validator');
-const csrf = require('csurf');
-const csrfProtection = csrf({ cookie: true });
+const db = require('../../config/database');
 
-// Helper para ejecutar consultas SQL seguras (para queries simples)
-const executeQuery = (sql, values = []) => {
-    return new Promise((resolve, reject) => {
-        connection.query(sql, values, (err, results) => {
-            err ? reject(err) : resolve(results);
-        });
+// Validación para Formulario 1
+const validateForm1 = [
+    body('nombre').trim().isLength({ min: 3, max: 50 }),
+    body('episodio').isInt({ min: 1, max: 999999 }),
+    ...Array(6).fill().map((_, i) => body(`pregunta${i+1}`).isIn(['0', '1']))
+];
+
+// Validación para Formulario 2
+const validateForm2 = [
+    ...Array(6).fill().map((_, i) => body(`pregunta${i+7}`).isIn(['0', '1', '2']))
+];
+
+// Cuestionario Nivel 1
+router.get('/Cuestionario_Riesgos', (req, res) => {
+    res.render('Cuestionario_Riesgos1', { 
+        title: 'Evaluación de Riesgo - Nivel 1' 
     });
-};
+});
 
-// Determinar categoría de riesgo basado en respuestas del primer cuestionario
-const determinarCategoriaRiesgo = (respuestas) => {
-    const psico = ['pregunta1', 'pregunta2', 'pregunta6'].some(p => respuestas[p] === "1");
-    const bio = ['pregunta3', 'pregunta4', 'pregunta5'].some(p => respuestas[p] === "1");
+// Procesar Nivel 1
+router.post('/formulario1', validateForm1, async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-    if (psico && bio) return "Psicológico/Biológico/Social";
-    if (psico) return "Psicológico/Social";
-    return bio ? "Biológico/Social" : "Sin riesgo";
-};
-
-// Helper para eliminar registros de forma segura
-const handleDelete = (allowedTable) => async (req, res) => {
     try {
-        if (!['test_1', 'test_2'].includes(allowedTable)) {
-            throw new Error('Operación no permitida');
-        }
-        // Determinar la columna primaria según la tabla
-        const primaryKey = allowedTable === 'test_1' ? 'idtest1' : 'idtest2';
-        await executeQuery(
-            `DELETE FROM ?? WHERE ?? = ?`,
-            [allowedTable, primaryKey, req.params.id]
+        const [result] = await db.execute(
+            'INSERT INTO evaluaciones (nombre, episodio, respuestas_nivel1, fecha) VALUES (?, ?, ?, NOW())',
+            [req.body.nombre, req.body.episodio, JSON.stringify(Object.values(req.body).slice(2))]
         );
-        res.redirect('/Historial');
-    } catch (err) {
-        console.error(`Error eliminando de ${allowedTable}:`, err);
-        res.status(500).render('error', {
-            mensaje: 'Error al completar la operación'
+        
+        res.json({ 
+            success: true, 
+            nextUrl: `/Cuestionario_Niveles2/${result.insertId}`
         });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-};
-
-// ----------------------------------------------------------
-// Definición de Rutas
-// ----------------------------------------------------------
-
-// Vista: Cuestionario de Riesgos
-router.get('/Cuestionario_Riesgos', csrfProtection, (req, res) => {
-    console.log('✅ Ruta /Cuestionario_Riesgos accedida');
-    res.render('Cuestionario_Riesgos1', { csrfToken: req.csrfToken() });
 });
 
-// Vista: Cuestionario de Niveles
-router.get('/Cuestionario_Niveles', csrfProtection, (req, res) => {
+// Cuestionario Nivel 2
+router.get('/Cuestionario_Niveles2/:id', async (req, res) => {
     res.render('Cuestionario_Niveles2', {
-        pacienteId: req.query.paciente,
-        csrfToken: req.csrfToken()
+        title: 'Evaluación de Riesgo - Nivel 2',
+        evaluacionId: req.params.id
     });
 });
 
-// Vista: Historial General
-router.get('/Historial', csrfProtection, async (req, res) => {
+// Procesar Nivel 2
+router.post('/formulario2/:id', validateForm2, async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
     try {
-        const [resultados] = await executeQuery(`
-      SELECT t1.*, 
-      GROUP_CONCAT(CONCAT_WS('|', 
-          t2.nivel_psicologico, 
-          t2.nivel_biologico, 
-          t2.nivel_social
-      )) AS detalles
-      FROM test_1 t1
-      LEFT JOIN test_2 t2 ON t1.idtest1 = t2.idtest1
-      GROUP BY t1.idtest1
-    `);
+        await db.execute(
+            'UPDATE evaluaciones SET respuestas_nivel2 = ? WHERE id = ?',
+            [JSON.stringify(Object.values(req.body).slice(0, 6)), req.params.id]
+        );
+        
+        res.json({ 
+            success: true,
+            nextUrl: '/Historial'
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-        const test1 = resultados.map(r => ({
-            ...r,
-            detalles: r.detalles ? r.detalles.split(',').map(d => {
-                const [psico, bio, social] = d.split('|');
-                return { psico, bio, social };
-            }) : []
-        }));
+// En la ruta del historial (/Historial), cambia esto:
+router.get('/Historial', async (req, res) => {
+    try {
+        const [evaluaciones] = await db.execute(`
+            SELECT 
+                id, 
+                nombre, 
+                episodio, 
+                IFNULL(categoria, 'Sin categoría') as categoria,
+                nivel_riesgo,
+                IFNULL(psico, 0) as psico,
+                IFNULL(bio, 0) as bio,
+                IFNULL(social, 0) as social,
+                DATE_FORMAT(fecha, '%Y-%m-%d') as fecha
+            FROM evaluaciones
+            ORDER BY fecha DESC
+        `);
 
-        res.render('Historiales_Generales', { test1, csrfToken: req.csrfToken() });
-    } catch (err) {
-        console.error("Error cargando historial:", err);
-        res.status(500).render('error', {
-            mensaje: "Error al cargar el historial"
+        res.render('Historiales_Generales', { 
+            test1: evaluaciones,
+            title: 'Historial de Evaluaciones'
+        });
+    } catch (error) {
+        console.error('Error al obtener historial:', error);
+        res.render('Historiales_Generales', { 
+            test1: [],
+            title: 'Historial de Evaluaciones'
         });
     }
 });
 
-// Eliminaciones (usando POST para evitar conflictos con formularios)
-router.post('/deleteHistorial1/:id', csrfProtection, handleDelete('test_1'));
-router.post('/deleteHistorial2/:id', csrfProtection, handleDelete('test_2'));
-
-// Procesar Formulario 1
-router.post(
-    '/formulario1',
-    [
-        body('nombre')
-            .trim()
-            .matches(/^[A-Za-záéíóúñÑ\s]{3,50}$/)
-            .withMessage('Nombre inválido (3-50 caracteres alfabéticos)'),
-        body('episodio')
-            .isInt({ min: 1, max: 999999 })
-            .withMessage('Episodio inválido (1-999999)')
-    ],
-    async (req, res) => {
-        try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(400).json({
-                    success: false,
-                    errors: errors.array().map(e => e.msg)
-                });
-            }
-
-            const conn = await connection.getConnection();
-            try {
-                await conn.beginTransaction();
-
-                const preguntasData = Object.fromEntries(
-                    Object.entries(req.body)
-                        .filter(([key]) => key.startsWith('pregunta'))
-                        .map(([key, val]) => [key, val === "1" ? 1 : 0])
-                );
-
-                const testData = {
-                    nombre: req.body.nombre.trim(),
-                    episodio: parseInt(req.body.episodio),
-                    ...preguntasData,
-                    categoria_riesgo: determinarCategoriaRiesgo(req.body)
-                };
-
-                const [result] = await conn.query('INSERT INTO test_1 SET ?', testData);
-
-                await conn.commit();
-                conn.release();
-
-                // Retornar JSON para que el cliente pueda redirigir
-                res.json({
-                    success: true,
-                    test2Url: `/Cuestionario_Niveles?paciente=${result.insertId}`
-                });
-            } catch (err) {
-                await conn.rollback();
-                conn.release();
-                throw err;
-            }
-        } catch (err) {
-            console.error("Error procesando formulario 1:", err);
-            res.status(500).json({
-                success: false,
-                error: "Error interno del servidor"
-            });
-        }
-    }
-);
-
-// Procesar Formulario 2
-router.post('/formulario2', csrfProtection, async (req, res) => {
+// Ruta para eliminar evaluación
+router.post('/eliminar-evaluacion/:id', async (req, res) => {
     try {
-        if (!req.body.paciente || isNaN(req.body.paciente)) {
-            throw new Error('ID de paciente inválido');
-        }
-
-        const testData = {
-            idtest1: parseInt(req.body.paciente),
-            pregunta7: parseInt(req.body.pregunta7),
-            pregunta8: parseInt(req.body.pregunta8),
-            pregunta9: parseInt(req.body.pregunta9),
-            pregunta10: parseInt(req.body.pregunta10),
-            pregunta11: parseInt(req.body.pregunta11),
-            pregunta12: parseInt(req.body.pregunta12)
-        };
-
-        // Asignar niveles de riesgo (lógica a ajustar según necesidad)
-        testData.nivel_psicologico = 'medio';
-        testData.nivel_biologico = 'medio';
-        testData.nivel_social = 'medio';
-
-        await executeQuery('INSERT INTO test_2 SET ?', testData);
-
-        res.json({ success: true, redirectUrl: '/Historial' });
-    } catch (err) {
-        console.error("Error procesando formulario 2:", err);
-        res.status(500).json({ success: false, error: "Error al procesar la evaluación detallada" });
+        // Primero eliminamos de test2 si existe (si usas esta tabla)
+        await db.execute('DELETE FROM test2 WHERE test1_id = ?', [req.params.id]);
+        
+        // Luego eliminamos de evaluaciones (o test1)
+        await db.execute('DELETE FROM evaluaciones WHERE id = ?', [req.params.id]);
+        
+        res.redirect('/Historial');
+    } catch (error) {
+        console.error('Error al eliminar evaluación:', error);
+        res.status(500).redirect('/Historial?error=eliminacion');
     }
 });
 
