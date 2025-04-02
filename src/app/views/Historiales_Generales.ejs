@@ -1,85 +1,144 @@
 <%- include('../includes/head.ejs') %>
     <title>Historial de Evaluaciones</title>
-</head>
-
-<body>
     <%- include('../includes/contacto.ejs') %>
 
-    <div class="container mt-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1>Historial de Evaluaciones</h1>
-            <a href="/Cuestionario_Riesgos" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Nueva Evaluación
-            </a>
-        </div>
+        <div class="container mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Historial de Evaluaciones</h1>
+                <a href="/Cuestionario_Riesgos" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nueva Evaluación
+                </a>
+            </div>
 
-        <% if (test1 && test1.length > 0) { %>
-            <div class="row">
-                <% test1.forEach(paciente => { %>
-                    <div class="col-md-6 mb-4">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <h4 class="card-title">
-                                            <%= paciente.nombre %>
-                                            <small class="text-muted">#<%= paciente.episodio %></small>
-                                        </h4>
-                                        <p class="text-muted">
-                                            <i class="fas fa-calendar-alt"></i>
-                                            <%= paciente.fecha %>
-                                        </p>
+            <% if (evaluaciones && evaluaciones.length> 0) { %>
+                <div class="row">
+                    <% evaluaciones.forEach(paciente=> { %>
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h4 class="card-title">
+                                                <%= paciente.nombre %>
+                                                    <small class="text-muted">#<%= paciente.episodio %></small>
+                                            </h4>
+                                            <p class="text-muted">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <%= new Date(paciente.fecha).toLocaleDateString('es-ES') %>
+                                            </p>
+                                        </div>
+                                        <% let badgeClass='bg-secondary' ; let categoriaDisplay=paciente.categoria
+                                            || 'Sin categoría' ; if (categoriaDisplay.includes('Psicológico') ||
+                                            categoriaDisplay.includes('Psicosocial')) { badgeClass='bg-danger' ; } else
+                                            if (categoriaDisplay.includes('Biológico')) { badgeClass='bg-info' ; } %>
+                                            <span class="badge <%= badgeClass %>">
+                                                <%= categoriaDisplay %>
+                                            </span>
                                     </div>
-                                    <% 
-                                    // Asignación segura de clases para el badge
-                                    let badgeClass = 'bg-secondary';
-                                    let categoriaDisplay = paciente.categoria || 'Sin categoría';
-                                    
-                                    if (categoriaDisplay.includes('Psicosocial')) {
-                                        badgeClass = 'bg-danger';
-                                    } else if (categoriaDisplay.includes('Biológico')) {
-                                        badgeClass = 'bg-info';
-                                    }
-                                    %>
-                                    <span class="badge <%= badgeClass %>">
-                                        <%= categoriaDisplay %>
-                                    </span>
-                                </div>
 
-                                <% if (paciente.nivel_riesgo) { %>
                                     <hr>
                                     <div class="mt-3">
-                                        <h6>Nivel de Riesgo: <strong><%= paciente.nivel_riesgo %></strong></h6>
-                                        <p>
-                                            Psicológico: <strong><%= paciente.psico %></strong><br>
-                                            Biológico: <strong><%= paciente.bio %></strong><br>
-                                            Social: <strong><%= paciente.social %></strong>
-                                        </p>
-                                    </div>
-                                <% } %>
+                                        <h6>Riesgo:
+                                            <strong>
+                                                <% const categoriasRiesgo=[]; if (paciente.psico>= 2)
+                                                    categoriasRiesgo.push("Psicológico");
+                                                    if (paciente.bio >= 2) categoriasRiesgo.push("Biológico");
+                                                    if (paciente.social >= 2) categoriasRiesgo.push("Social");
 
-                                <div class="d-flex justify-content-between mt-3">
-                                    <form action="/eliminar-evaluacion/<%= paciente.id %>" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar esta evaluación?');">
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i> Eliminar
-                                        </button>
-                                    </form>
-                                    <a href="/Cuestionario_Niveles2/<%= paciente.id %>" class="btn btn-link">
-                                        Ver Detalles <i class="fas fa-arrow-right"></i>
-                                    </a>
+                                                    if (categoriasRiesgo.length === 0) {
+                                                    %>Ninguno<% } else if (categoriasRiesgo.length===1) { %>
+                                                        <%= categoriasRiesgo[0] %>
+                                                            <% } else if (categoriasRiesgo.length===2) { %>
+                                                                <%= categoriasRiesgo.join(' y ') %><%
+                                                } else {
+                                                    %><%= categoriasRiesgo.slice(0, -1).join(' , ') %> y <%= categoriasRiesgo.slice(-1) %><%
+                                                }
+                                                %>
+                                            </strong>
+                                        </h6>
+                                        <p>
+                                            Psicológico:
+                                            <strong
+                                                class=" <%=paciente.psico>= 3 ? ' text-danger' : paciente.psico>= 2 ?
+                                                                    'text-warning' : 'text-success' %>">
+                                                                    <%= paciente.psico>= 3 ? 'Alto' : paciente.psico >=
+                                                                        2 ?
+                                                                        'Medio' : 'Bajo'
+                                                                        %>
+                                            </strong><br>
+
+                                            Biológico:
+                                            <strong
+                                                class="<%= paciente.bio >= 3 ? 'text-danger' : paciente.bio >= 2 ? 'text-warning' : 'text-success' %>">
+                                                <%= paciente.bio>= 3 ? 'Alto' : paciente.bio >= 2 ? 'Medio' : 'Bajo'
+                                                    %>
+                                            </strong><br>
+
+                                            Social:
+                                            <strong class="<strong class=" <%=paciente.social>= 3 ? 'text-danger' :
+                                                paciente.social >= 2 ? 'text-warning' : 'text-success' %>">
+                                                <%= paciente.social>= 3 ? 'Alto' : paciente.social >= 2 ? 'Medio' :
+                                                    'Bajo' %>
+                                            </strong>
+                                            </p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <form class="eliminar-evaluacion-form" data-id="<%= paciente.id %>">
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </button>
+                                        </form>
+                                        <a href="/Detalles_Evaluacion/<%= paciente.id %>"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fas fa-eye"></i> Ver Detalles
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <% }); %>
+                </div>
+                <% } else { %>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> No hay evaluaciones registradas
                     </div>
-                <% }); %>
-            </div>
-        <% } else { %>
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle"></i> No hay evaluaciones registradas
-            </div>
-        <% } %>
-    </div>
+                    <% } %>
+        </div>
 
-    <%- include('../includes/footer.ejs') %>
-</body>
-</html>
+        <script>
+            // Manejo de eliminación con AJAX
+            document.querySelectorAll('.eliminar-evaluacion-form').forEach(form => {
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+                    const id = this.getAttribute('data-id');
+
+                    if (!confirm('¿Estás seguro de eliminar esta evaluación?')) return;
+
+                    try {
+                        const response = await fetch(`/eliminar-evaluacion/${id}`, {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        const data = await response.json();
+
+                        if (!response.ok || !data.success) {
+                            throw new Error(data.error || 'Error al eliminar');
+                        }
+
+                        // Mostrar mensaje de éxito y recargar
+                        alert('Evaluación eliminada correctamente');
+                        window.location.reload();
+
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Error al eliminar evaluación: ' + error.message);
+                    }
+                });
+            });
+        </script>
+
+        <%- include('../includes/footer.ejs') %>

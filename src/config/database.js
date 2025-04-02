@@ -1,21 +1,17 @@
-// db.js
 const mysql = require('mysql2');
-require('dotenv').config(); // Carga las variables de entorno
+require('dotenv').config();
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    database: process.env.DB_NAME,  // Asegúrate de que esta línea está presente
+    port: process.env.DB_PORT || 3306
 });
 
-// Verificar conexión
 pool.getConnection((err, connection) => {
     if (err) {
-        console.error('Error de conexión a la BD:', err.code, err.message);
+        console.error('Error de conexión a la BD:', err.code, err.sqlMessage);
         return;
     }
     console.log('¡Conectado a MySQL!');
