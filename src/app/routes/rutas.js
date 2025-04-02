@@ -1,119 +1,128 @@
 const express = require('express');
 const router = express.Router();
+const pool = require('../../config/database');
 const { body, validationResult } = require('express-validator');
-const db = require('../../config/database');
 
-// Validación para Formulario 1
-const validateForm1 = [
-    body('nombre').trim().isLength({ min: 3, max: 50 }),
-    body('episodio').isInt({ min: 1, max: 999999 }),
-    ...Array(6).fill().map((_, i) => body(`pregunta${i+1}`).isIn(['0', '1']))
-];
+// Ruta principal - Inicio
+router.get('/', (req, res) => {
+    res.render('Inicio');
+});
 
-// Validación para Formulario 2
-const validateForm2 = [
-    ...Array(6).fill().map((_, i) => body(`pregunta${i+7}`).isIn(['0', '1', '2']))
-];
-
-// Cuestionario Nivel 1
+// Mostrar formulario de evaluación
 router.get('/Cuestionario_Riesgos', (req, res) => {
-    res.render('Cuestionario_Riesgos1', { 
-        title: 'Evaluación de Riesgo - Nivel 1' 
-    });
+    res.render('Cuestionario_Combinados');
 });
 
-// Procesar Nivel 1
-router.post('/formulario1', validateForm1, async (req, res) => {
+router.post('/Cuestionario_Niveles', [
+    body('nombre').notEmpty().withMessage('El nombre es requerido'),
+    body('episodio').isInt({ min: 1 }).withMessage('Episodio debe ser un número válido')
+], async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     try {
-        const [result] = await db.execute(
-            'INSERT INTO evaluaciones (nombre, episodio, respuestas_nivel1, fecha) VALUES (?, ?, ?, NOW())',
-            [req.body.nombre, req.body.episodio, JSON.stringify(Object.values(req.body).slice(2))]
+        const { nombre, episodio } = req.body;
+        let psico = 0, bio = 0, social = 0;
+
+        // Calcular puntuaciones para preguntas 1-6 (Nivel 1 - Sí/No)
+        // Cada "Sí" (1) suma 1 punto a biológico (son todas preguntas biológicas)
+        for (let i = 1; i <= 6; i++) {
+            bio += parseInt(req.body[`pregunta${i}`]) || 0;
+        }
+
+        // Calcular puntuaciones para preguntas 7-12 (Nivel 2)
+        for (let i = 7; i <= 12; i++) {
+            const valor = parseInt(req.body[`pregunta${i}`]) || 0;
+            if (i <= 8) psico += valor;       // Preguntas 7-8: Psicológico
+            else if (i <= 10) bio += valor;    // Preguntas 9-10: Biológico
+            else social += valor;              // Preguntas 11-12: Social
+        }
+
+        // Determinar categoría principal
+        const categoria = psico > bio ? 
+                        (psico > social ? 'Psicológico' : 'Social') : 
+                        (bio > social ? 'Biológico' : 'Social');
+
+        // Determinar nivel de riesgo
+        const total = psico + bio + social;
+        const nivel_riesgo = total >= 8 ? 'Alto' : total >= 4 ? 'Medio' : 'Bajo';
+
+        // Insertar en evaluaciones
+        const [result] = await pool.execute(
+            `INSERT INTO evaluaciones 
+            (nombre, episodio, fecha, categoria, psico, bio, social) 
+            VALUES (?, ?, CURDATE(), ?, ?, ?, ?)`,
+            [nombre, episodio, categoria, psico, bio, social]
         );
-        
-        res.json({ 
-            success: true, 
-            nextUrl: `/Cuestionario_Niveles2/${result.insertId}`
-        });
+
+        res.redirect("/");
+
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error en formulario combinado:', error);
+        res.status(500).json({ error: 'Error del servidor' });
     }
 });
 
-// Cuestionario Nivel 2
-router.get('/Cuestionario_Niveles2/:id', async (req, res) => {
-    res.render('Cuestionario_Niveles2', {
-        title: 'Evaluación de Riesgo - Nivel 2',
-        evaluacionId: req.params.id
-    });
-});
-
-// Procesar Nivel 2
-router.post('/formulario2/:id', validateForm2, async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
-
+// Mostrar detalles de evaluación
+router.get('/Detalles_Evaluacion/:id', async (req, res) => {
     try {
-        await db.execute(
-            'UPDATE evaluaciones SET respuestas_nivel2 = ? WHERE id = ?',
-            [JSON.stringify(Object.values(req.body).slice(0, 6)), req.params.id]
+        const [evaluacion] = await pool.execute(
+            'SELECT * FROM evaluaciones WHERE id = ?',
+            [req.params.id]
         );
-        
-        res.json({ 
-            success: true,
-            nextUrl: '/Historial'
-        });
+
+        if (evaluacion.length === 0) {
+            return res.status(404).render('error', { mensaje: 'Evaluación no encontrada' });
+        }
+
+        const total = evaluacion[0].psico + evaluacion[0].bio + evaluacion[0].social;
+        evaluacion[0].nivel_riesgo = total >= 8 ? 'Alto' : total >= 4 ? 'Medio' : 'Bajo';
+
+        res.render('Detalles_Evaluacion', { evaluacion: evaluacion[0] });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error(error);
+        res.status(500).render('error', { mensaje: 'Error del servidor' });
     }
 });
 
-// En la ruta del historial (/Historial), cambia esto:
+// Mostrar historial
 router.get('/Historial', async (req, res) => {
     try {
-        const [evaluaciones] = await db.execute(`
-            SELECT 
-                id, 
-                nombre, 
-                episodio, 
-                IFNULL(categoria, 'Sin categoría') as categoria,
-                nivel_riesgo,
-                IFNULL(psico, 0) as psico,
-                IFNULL(bio, 0) as bio,
-                IFNULL(social, 0) as social,
-                DATE_FORMAT(fecha, '%Y-%m-%d') as fecha
-            FROM evaluaciones
-            ORDER BY fecha DESC
-        `);
+        const [evaluaciones] = await pool.execute(
+            'SELECT * FROM evaluaciones ORDER BY fecha DESC'
+        );
 
-        res.render('Historiales_Generales', { 
-            test1: evaluaciones,
-            title: 'Historial de Evaluaciones'
+        evaluaciones.forEach(e => {
+            const total = e.psico + e.bio + e.social;
+            e.nivel_riesgo = total >= 8 ? 'Alto' : total >= 4 ? 'Medio' : 'Bajo';
         });
+
+        res.render('Historiales_Generales', { evaluaciones });
     } catch (error) {
-        console.error('Error al obtener historial:', error);
-        res.render('Historiales_Generales', { 
-            test1: [],
-            title: 'Historial de Evaluaciones'
-        });
+        console.error(error);
+        res.status(500).render('error', { mensaje: 'Error del servidor' });
     }
 });
 
-// Ruta para eliminar evaluación
+// Eliminar evaluación (nueva ruta)
 router.post('/eliminar-evaluacion/:id', async (req, res) => {
     try {
-        // Primero eliminamos de test2 si existe (si usas esta tabla)
-        await db.execute('DELETE FROM test2 WHERE test1_id = ?', [req.params.id]);
+        const [result] = await pool.execute(
+            'DELETE FROM evaluaciones WHERE id = ?',
+            [req.params.id]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, error: 'Evaluación no encontrada' });
+        }
+
+        res.json({ success: true });
         
-        // Luego eliminamos de evaluaciones (o test1)
-        await db.execute('DELETE FROM evaluaciones WHERE id = ?', [req.params.id]);
-        
-        res.redirect('/Historial');
     } catch (error) {
         console.error('Error al eliminar evaluación:', error);
-        res.status(500).redirect('/Historial?error=eliminacion');
+        res.status(500).json({ success: false, error: 'Error del servidor' });
     }
 });
 
