@@ -15,13 +15,15 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", 'cdn.jsdelivr.net', 'kit.fontawesome.com'],
-      styleSrc: ["'self'", 'cdn.jsdelivr.net', "'unsafe-inline'"],
-      fontSrc: ["'self'", 'cdn.jsdelivr.net', 'fonts.gstatic.com'],
-      imgSrc: ["'self'", 'data:']
+      scriptSrc: ["'self'", "cdn.jsdelivr.net", "kit.fontawesome.com"],
+      styleSrc: ["'self'", "cdn.jsdelivr.net", "'unsafe-inline'"],
+      fontSrc: ["'self'", "ka-f.fontawesome.com"],
+      connectSrc: ["'self'"],
+      imgSrc: ["'self'", "data:"]
     }
   }
 }));
+
 
 app.use(cors({
   origin: process.env.ALLOWED_ORIGINS?.split(',') || '*'
@@ -54,7 +56,7 @@ app.use('/', mainRouter);
 // 7. Manejo de errores
 // Error 404
 app.use((req, res, next) => {
-  res.status(404).render('error', { 
+  res.status(404).render('error', {
     mensaje: 'Página no encontrada',
     error: { status: 404 }
   });
@@ -64,14 +66,14 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   console.error('Error global:', err.stack);
   const status = err.status || 500;
-  
+
   if (req.accepts('html')) {
-    res.status(status).render('error', { 
+    res.status(status).render('error', {
       mensaje: 'Error interno del servidor',
       error: process.env.NODE_ENV === 'development' ? err : {}
     });
   } else {
-    res.status(status).json({ 
+    res.status(status).json({
       error: 'Internal Server Error',
       message: process.env.NODE_ENV === 'development' ? err.message : ''
     });

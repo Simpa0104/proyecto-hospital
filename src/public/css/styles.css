@@ -205,3 +205,8 @@ a {
     background: #e3f7fb;
     border-left: 4px solid #45b7d1;
 }
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
