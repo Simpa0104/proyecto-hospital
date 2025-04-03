@@ -21,6 +21,9 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
+      - name: Crear directorio para resultados de Jest
+        run: mkdir -p pruebas/resultados/jest
+
       - name: Ejecutar pruebas de Jest
         run: npm test pruebasJest -- --json --outputFile=pruebas/resultados/jest/jest-results.json
 
@@ -39,7 +42,10 @@ jobs:
       - name: Instalar k6
         run: |
           curl -s https://packagecloud.io/install/repositories/grafana/stable/script.deb.sh | sudo bash
-          sudo snap install -y k6
+          sudo snap install k6
+
+      - name: Crear directorio para resultados de k6
+        run: mkdir -p pruebas/resultados/k6
 
       - name: Ejecutar pruebas de carga con K6
         run: |
