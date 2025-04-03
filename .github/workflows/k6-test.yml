@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias del proyecto
+        run: npm ci
+
+      - name: Instalar k6
+        run: |
+              curl -s https://packagecloud.io/install/repositories/grafana/stable/script.deb.sh | sudo bash
+              sudo snap install k6
+
+      - name: Ejecutar pruebas de rendimiento con k6
+        run: |
+          echo "Iniciando prueba de "
+          k6 run pruebas/Pruebask6/rendimiento_test.js --out json=report-rendimiento.json
+
+      - name: Ejecutar pruebas de concurrencia con k6
+        run: |
+          echo "Iniciando prueba de "
+          k6 run pruebas/Pruebask6/concurrencia_test.js --out json=report-concurrencia.json
+
+      - name: Guardar resultados de pruebas
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-test-resultados
+          path: pruebas/resultados/k6/
