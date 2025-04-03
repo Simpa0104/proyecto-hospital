@@ -35,9 +35,3 @@ jobs:
         run: |
           echo "Iniciando prueba de "
           k6 run pruebas/Pruebask6/concurrencia_test.js --out json=report-concurrencia.json
-
-      - name: Guardar resultados de pruebas
-        uses: actions/upload-artifact@v4
-        with:
-          name: k6-test-resultados
-          path: pruebas/resultados/k6/
