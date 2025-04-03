@@ -93,14 +93,14 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                console.log("Script de eliminación cargado correctamente"); // Verifica que el script se ejecuta
+                console.log("Script de eliminación cargado correctamente");
 
                 document.querySelectorAll('.eliminar-evaluacion-form').forEach(form => {
                     form.addEventListener('submit', async function (event) {
-                        event.preventDefault(); // Evita que el formulario recargue la página
+                        event.preventDefault(); 
 
                         const id = form.getAttribute('data-id');
-                        console.log("Intentando eliminar evaluación con ID:", id); // Verifica que el ID se obtenga correctamente
+                        console.log("Intentando eliminar evaluación con ID:", id);
 
                         if (!id) {
                             console.error("No se encontró ID para eliminar");
@@ -109,7 +109,7 @@
 
                         try {
                             const response = await fetch(`/eliminar-evaluacion/${id}`, {
-                                method: 'POST', // Asegura que coincida con la ruta en rutas.js
+                                method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                             });
                             const data = await response.json();

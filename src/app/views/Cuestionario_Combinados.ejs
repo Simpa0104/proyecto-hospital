@@ -8,7 +8,6 @@
             <form id="testForm" method="POST" action="/Cuestionario_Niveles">
                 <h1 class="text-center mb-4">Detección de Riesgo - Nivel 1 y 2</h1>
 
-                <!-- Datos del paciente -->
                 <div class="card mb-4">
                     <div class="card-body">
                         <h4 class="card-title">Datos del Paciente</h4>
@@ -23,7 +22,6 @@
                     </div>
                 </div>
 
-                <!-- Nivel 1: Preguntas 1-6 (Sí/No) -->
                 <% const preguntas1 = [
                     { num: 1, texto: "Niño(a)s y adolescentes..." },
                     { num: 2, texto: "Gestantes y puérperas..." },
@@ -50,7 +48,6 @@
                     </div>
                 <% }); %>
 
-                <!-- Nivel 2: Preguntas 7-12 (Mantener igual) -->
                 <% const preguntas2 = [
                     { num: 7, texto: "Ansiedad o ánimo deprimido" },
                     { num: 8, texto: "Adherencia a tratamientos" },
@@ -106,8 +103,7 @@
                 throw new Error(data.error || 'Error en el servidor');
             }
     
-            // Redirige a la página de inicio
-            window.location.href = data.nextUrl; // Usará el "/" que enviaste desde el servidor
+            window.location.href = data.nextUrl;
     
         } catch (error) {
             console.error('Error:', error);

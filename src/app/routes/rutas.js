@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../../config/database');
 const { body, validationResult } = require('express-validator');
 
+
 // Ruta principal
 router.get('/', (req, res) => {
     res.render('Inicio');
@@ -15,7 +16,9 @@ router.get('/Cuestionario_Riesgos', (req, res) => {
 
 // Procesar evaluación
 router.post('/Cuestionario_Niveles', [
-    body('nombre').notEmpty().withMessage('El nombre es requerido'),
+    body('nombre')
+        .notEmpty().withMessage('El nombre es requerido')
+        .matches(/^[a-zA-Z\s]+$/).withMessage('El nombre solo debe contener letras y espacios'),
     body('episodio').isInt({ min: 1 }).withMessage('Episodio debe ser un número válido')
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -27,23 +30,20 @@ router.post('/Cuestionario_Niveles', [
         const { nombre, episodio } = req.body;
         let psico = 0, bio = 0, social = 0;
 
-        // Calcular puntajes (Nivel 1 - Preguntas 1-6: Sí=1, No=0)
         for (let i = 1; i <= 6; i++) {
             bio += parseInt(req.body[`pregunta${i}`]) || 0;
         }
 
-        // Calcular puntajes (Nivel 2 - Preguntas 7-12)
         for (let i = 7; i <= 12; i++) {
             const valor = parseInt(req.body[`pregunta${i}`]) || 0;
-            if (i <= 8) psico += valor;    // Preguntas 7-8: Psicológico
-            else if (i <= 10) bio += valor; // Preguntas 9-10: Biológico
-            else social += valor;           // Preguntas 11-12: Social
+            if (i <= 8) psico += valor;
+            else if (i <= 10) bio += valor;
+            else social += valor;
         }
 
-        // Umbrales ajustados (35% del máximo teórico)
-        const umbralPsico = 0.35 * 8;  // 8 = máximo teórico psicológico
-        const umbralBio = 0.35 * 16;   // 16 = máximo teórico biológico
-        const umbralSocial = 0.35 * 4;  // 4 = máximo teórico social
+        const umbralPsico = 0.35 * 8;
+        const umbralBio = 0.35 * 16;
+        const umbralSocial = 0.35 * 4;
 
         // Determinar categorías con riesgo
         const categoriasRiesgo = [];
@@ -51,11 +51,9 @@ router.post('/Cuestionario_Niveles', [
         if (bio >= umbralBio) categoriasRiesgo.push("Biológico");
         if (social >= umbralSocial) categoriasRiesgo.push("Social");
 
-        // Formatear texto para la columna categoria
         const categoriaTexto = categoriasRiesgo.length > 0 ?
             categoriasRiesgo.join(', ') : 'Ninguno';
 
-        // Insertar en DB usando la columna categoria existente
         const [result] = await pool.execute(
             `INSERT INTO evaluaciones 
             (nombre, episodio, fecha, categoria, psico, bio, social) 
@@ -119,23 +117,20 @@ router.get('/Historial', async (req, res) => {
 
 // Eliminar evaluación
 router.post('/eliminar-evaluacion/:id', async (req, res) => {
-    const { id } = req.params;
-    console.log('Petición recibida para eliminar:', id); // Verifica si llega la solicitud
-
-    if (!id) {
-        return res.status(400).json({ success: false, message: "ID no proporcionado" });
-    }
-
     try {
-        // Aquí deberías agregar la lógica para eliminar la evaluación de la base de datos
-        // Ejemplo:
-        // await Evaluacion.findByIdAndDelete(id);
+        const [result] = await pool.execute(
+            'DELETE FROM evaluaciones WHERE id = ?',
+            [req.params.id]
+        );
 
-        console.log("Evaluación eliminada con éxito");
-        res.json({ success: true, message: "Evaluación eliminada con éxito" });
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: "Evaluación no encontrada" });
+        }
+
+        res.json({ success: true });
     } catch (error) {
-        console.error("Error eliminando la evaluación:", error);
-        res.status(500).json({ success: false, message: "Error interno del servidor" });
+        console.error("Error eliminando:", error);
+        res.status(500).json({ success: false, message: "Error del servidor" });
     }
 });
 

@@ -1,0 +1,55 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-jest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Ejecutar pruebas de Jest
+        run: npm test pruebasJest -- --json --outputFile=pruebas/resultados/jest/jest-results.json
+
+      - name: Guardar resultados de Jest
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-test-results
+          path: pruebas/resultados/jest/
+
+  test-k6:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Instalar k6
+        run: |
+          curl -s https://packagecloud.io/install/repositories/grafana/stable/script.deb.sh | sudo bash
+          sudo apt install -y k6
+
+      - name: Ejecutar pruebas de carga con K6
+        run: |
+          for test_file in pruebask6/*.js; do
+            echo "Ejecutando prueba de carga: $test_file"
+            k6 run "$test_file" --out json=pruebas/resultados/k6/results-$(basename $test_file .js).json
+          done
+
+      - name: Guardar resultados de K6
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-test-results
+          path: pruebas/resultados/k6/

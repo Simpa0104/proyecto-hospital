@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 // 1. Configuración inicial y variables de entorno
-dotenv.config({ path: path.join(__dirname, '../env/.env') });
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 // 2. Creación de la aplicación Express
 const app = express();

@@ -16,6 +16,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test-watch": "jest --watchAll",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "format": "prettier --write ."
@@ -31,6 +32,8 @@
     "mysql2": "^3.13.0"
   },
   "devDependencies": {
+    "eslint": "^9.23.0",
+    "eslint-plugin-security": "^3.0.1",
     "jest": "^29.7.0",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3",
