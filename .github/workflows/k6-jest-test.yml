@@ -1,61 +1,93 @@
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-jobs:
-  test-jest:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout del código
-        uses: actions/checkout@v4
-
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Instalar dependencias
-        run: npm ci
-
-      - name: Crear directorio para resultados de Jest
-        run: mkdir -p pruebas/resultados/jest
-
-      - name: Ejecutar pruebas de Jest
-        run: npm test pruebasJest -- --json --outputFile=pruebas/resultados/jest/jest-results.json
-
-      - name: Guardar resultados de Jest
-        uses: actions/upload-artifact@v4
-        with:
-          name: jest-test-results
-          path: pruebas/resultados/jest/
-
-  test-k6:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout del código
-        uses: actions/checkout@v4
-
-      - name: Instalar k6
-        run: |
-          curl -s https://packagecloud.io/install/repositories/grafana/stable/script.deb.sh | sudo bash
-          sudo snap install k6
-
-      - name: Crear directorio para resultados de k6
-        run: mkdir -p pruebas/resultados/k6
-
-      - name: Ejecutar pruebas de carga con K6
-        run: |
-          for test_file in pruebask6/*.js; do
-            echo "Ejecutando prueba de carga: $test_file"
-            k6 run "$test_file" --out json=pruebas/resultados/k6/results-$(basename $test_file .js).json
-          done
-
-      - name: Guardar resultados de K6
-        uses: actions/upload-artifact@v4
-        with:
-          name: k6-test-results
-          path: pruebas/resultados/k6/
+          on:
+            push:
+              branches:
+                - main
+            pull_request:
+              branches:
+                - main
+          
+          jobs:
+            test-jest:
+              runs-on: ubuntu-latest
+              services:
+                mysql:
+                  image: mysql:8.0
+                  env:
+                    MYSQL_ROOT_PASSWORD: root
+                    MYSQL_DATABASE: proyecto_hospital
+                    MYSQL_USER: testuser
+                    MYSQL_PASSWORD: testpassword
+                  ports:
+                    - 3306:3306
+                  options: >-
+                    --health-cmd="mysqladmin ping -h 127.0.0.1 -u root --password=root"
+                    --health-interval=10s
+                    --health-timeout=5s
+                    --health-retries=5
+          
+              steps:
+                - name: Checkout del código
+                  uses: actions/checkout@v4
+          
+                - name: Configurar Node.js
+                  uses: actions/setup-node@v4
+                  with:
+                    node-version: 18
+          
+                - name: Instalar dependencias
+                  run: npm ci
+          
+                - name: Esperar a que MySQL esté listo
+                  run: |
+                    for i in {1..30}; do
+                      if mysqladmin ping -h 127.0.0.1 -u root --password=root --silent; then
+                        echo "MySQL está listo" && break
+                      fi
+                      echo "Esperando MySQL..."
+                      sleep 2
+                    done
+          
+                - name: Importar base de datos
+                  run: |
+                    mysql -h 127.0.0.1 -u root -proot proyecto_hospital < database/proyecto_hospital.sql
+          
+                - name: Crear directorio para resultados de Jest
+                  run: mkdir -p pruebas/resultados/jest
+          
+                - name: Ejecutar pruebas de Jest
+                  env:
+                    DATABASE_URL: mysql://testuser:testpassword@127.0.0.1:3306/proyecto_hospital
+                  run: npm test pruebasJest -- --json --outputFile=pruebas/resultados/jest/jest-results.json
+          
+                - name: Guardar resultados de Jest
+                  uses: actions/upload-artifact@v4
+                  with:
+                    name: jest-test-results
+                    path: pruebas/resultados/jest/
+          
+            test-k6:
+              runs-on: ubuntu-latest
+              steps:
+                - name: Checkout del código
+                  uses: actions/checkout@v4
+          
+                - name: Instalar k6
+                  run: |
+                    curl -s https://packagecloud.io/install/repositories/grafana/stable/script.deb.sh | sudo bash
+                    sudo snap install k6
+          
+                - name: Crear directorio para resultados de k6
+                  run: mkdir -p pruebas/resultados/k6
+          
+                - name: Ejecutar pruebas de carga con K6
+                  run: |
+                    for test_file in pruebask6/*.js; do
+                      echo "Ejecutando prueba de carga: $test_file"
+                      k6 run "$test_file" --out json=pruebas/resultados/k6/results-$(basename $test_file .js).json
+                    done
+          
+                - name: Guardar resultados de K6
+                  uses: actions/upload-artifact@v4
+                  with:
+                    name: k6-test-results
+                    path: pruebas/resultados/k6/
