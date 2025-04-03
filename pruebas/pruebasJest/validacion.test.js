@@ -1,5 +1,6 @@
 const request = require('supertest');
-const app = require('../src/config/server');  // Asegúrate de importar el servidor correctamente
+const app = require('../../src/config/server');
+const pool = require('../../src/config/database');
 
 describe('Pruebas de validación de datos', () => {
     test('Debe rechazar un POST a /Cuestionario_Niveles sin nombre ni episodio', async () => {

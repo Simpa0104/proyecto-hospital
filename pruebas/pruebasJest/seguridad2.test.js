@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../src/config/server');
+const app = require('../../src/config/server');
 
 test('Debe rechazar un intento de XSS en /Cuestionario_Niveles', async () => {
     const response = await request(app)

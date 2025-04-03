@@ -1,6 +1,6 @@
 const request = require('supertest');
-const app = require('../src/config/server');
-const pool = require('../src/config/database');
+const app = require('../../src/config/server');
+const pool = require('../../src/config/database');
 
 describe('Pruebas de seguridad en los endpoints', () => {
     test('Debe rechazar un intento de SQL Injection en /Cuestionario_Niveles', async () => {

@@ -1,6 +1,6 @@
 const request = require('supertest');
-const app = require('../src/config/server');
-const pool = require('../src/config/database');
+const app = require('../../src/config/server');
+const pool = require('../../src/config/database');
 
 describe('Pruebas de API - Proyecto Hospital', () => {
 
