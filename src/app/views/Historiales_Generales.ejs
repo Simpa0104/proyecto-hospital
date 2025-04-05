@@ -32,10 +32,10 @@
                                 paciente.categoriasArray.length === 2 ? 'bg-primary' :
                                 paciente.categoriasArray.length === 1 ? 'bg-success' : 'bg-secondary'
                             %>">
-                                            <% let categoriasCount=Array.isArray(paciente.categoriasArray) ?
-                                                paciente.categoriasArray.length : 0; %>
-                                                <%= `${categoriasCount}/3` %>
-
+                                            <%= paciente.categoriasArray.length> 0 ?
+                                                `${paciente.categoriasArray.length}/3` :
+                                                '0/3'
+                                                %>
                                         </span>
                                     </div>
 
