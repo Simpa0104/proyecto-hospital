@@ -32,10 +32,10 @@
                                 paciente.categoriasArray.length === 2 ? 'bg-primary' :
                                 paciente.categoriasArray.length === 1 ? 'bg-success' : 'bg-secondary'
                             %>">
-                                            <%= paciente.categoriasArray.length> 0 ?
-                                                `${paciente.categoriasArray.length}/3` :
-                                                '0/3'
-                                                %>
+                                            <% let categoriasCount=Array.isArray(paciente.categoriasArray) ?
+                                                paciente.categoriasArray.length : 0; %>
+                                                <%= `${categoriasCount}/3` %>
+
                                         </span>
                                     </div>
 
@@ -97,7 +97,7 @@
 
                 document.querySelectorAll('.eliminar-evaluacion-form').forEach(form => {
                     form.addEventListener('submit', async function (event) {
-                        event.preventDefault(); 
+                        event.preventDefault();
 
                         const id = form.getAttribute('data-id');
                         console.log("Intentando eliminar evaluación con ID:", id);
