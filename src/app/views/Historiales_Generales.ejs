@@ -132,6 +132,50 @@
                         <i class="fas fa-info-circle"></i> No hay evaluaciones registradas
                     </div>
                     <% } %>
+
+                        <!-- Paginación -->
+                        <% if (paginacion && paginacion.totalPaginas> 1) { %>
+                            <nav aria-label="Paginación de evaluaciones">
+                                <ul class="pagination justify-content-center mt-4">
+                                    <% if (paginacion.tieneAnterior) { %>
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="/Historial?pagina=<%= paginacion.paginaActual - 1 %><%= filtros.nombre ? `&nombre=${filtros.nombre}` : '' %><%= filtros.episodio ? `&episodio=${filtros.episodio}` : '' %><%= filtros.categoria && filtros.categoria !== 'todas' ? `&categoria=${filtros.categoria}` : '' %>">
+                                                &laquo; Anterior
+                                            </a>
+                                        </li>
+                                        <% } else { %>
+                                            <li class="page-item disabled">
+                                                <span class="page-link">&laquo; Anterior</span>
+                                            </li>
+                                            <% } %>
+
+                                                <% for (let i=1; i <=paginacion.totalPaginas; i++) { %>
+                                                    <li
+                                                        class="page-item <%= i === paginacion.paginaActual ? 'active' : '' %>">
+                                                        <a class="page-link"
+                                                            href="/Historial?pagina=<%= i %><%= filtros.nombre ? `&nombre=${filtros.nombre}` : '' %><%= filtros.episodio ? `&episodio=${filtros.episodio}` : '' %><%= filtros.categoria && filtros.categoria !== 'todas' ? `&categoria=${filtros.categoria}` : '' %>">
+                                                            <%= i %>
+                                                        </a>
+                                                    </li>
+                                                    <% } %>
+
+                                                        <% if (paginacion.tieneSiguiente) { %>
+                                                            <li class="page-item">
+                                                                <a class="page-link"
+                                                                    href="/Historial?pagina=<%= paginacion.paginaActual + 1 %><%= filtros.nombre ? `&nombre=${filtros.nombre}` : '' %><%= filtros.episodio ? `&episodio=${filtros.episodio}` : '' %><%= filtros.categoria && filtros.categoria !== 'todas' ? `&categoria=${filtros.categoria}` : '' %>">
+                                                                    Siguiente &raquo;
+                                                                </a>
+                                                            </li>
+                                                            <% } else { %>
+                                                                <li class="page-item disabled">
+                                                                    <span class="page-link">Siguiente &raquo;</span>
+                                                                </li>
+                                                                <% } %>
+                                </ul>
+                            </nav>
+                            <% } %>
+
         </div>
 
         <script nonce="<%= nonce %>">

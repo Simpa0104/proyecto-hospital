@@ -118,12 +118,15 @@ router.get('/Detalles_Evaluacion/:id', async (req, res) => {
     }
 });
 
-// Mostrar historial
+// Mostrar historial con paginación
 router.get('/Historial', async (req, res) => {
     try {
-        const { nombre, episodio, categoria } = req.query;
+        const { nombre, episodio, categoria, pagina = 1 } = req.query;
+        const porPagina = 10; // Número de resultados por página
+        const offset = (pagina - 1) * porPagina;
 
         let query = 'SELECT * FROM evaluaciones';
+        let countQuery = 'SELECT COUNT(*) AS total FROM evaluaciones';
         let conditions = [];
         let params = [];
 
@@ -143,12 +146,22 @@ router.get('/Historial', async (req, res) => {
         }
 
         if (conditions.length > 0) {
-            query += ' WHERE ' + conditions.join(' AND ');
+            const whereClause = ' WHERE ' + conditions.join(' AND ');
+            query += whereClause;
+            countQuery += whereClause;
         }
 
-        query += ' ORDER BY fecha DESC';
+        query += ' ORDER BY fecha DESC LIMIT ? OFFSET ?';
 
-        const [evaluaciones] = await pool.execute(query, params);
+        // Ejecutar consulta para obtener los datos paginados
+        const [evaluaciones] = await pool.execute(
+            query,
+            [...params, porPagina.toString(), offset.toString()]
+        );
+
+        // Obtener el total de registros para calcular el número de páginas
+        const [[{ total }]] = await pool.execute(countQuery, params);
+        const totalPaginas = Math.ceil(total / porPagina);
 
         // Preparar datos para la vista
         evaluaciones.forEach(e => {
@@ -159,6 +172,12 @@ router.get('/Historial', async (req, res) => {
         res.render('Historiales_Generales', {
             evaluaciones,
             filtros: { nombre, episodio, categoria },
+            paginacion: {
+                paginaActual: parseInt(pagina),
+                totalPaginas,
+                tieneAnterior: pagina > 1,
+                tieneSiguiente: pagina < totalPaginas
+            },
             csrfToken: req.csrfToken()
         });
     } catch (error) {
