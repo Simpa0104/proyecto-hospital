@@ -3,9 +3,9 @@ import { check } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '20ms', target: 2 },
-        { duration: '20ms', target: 4 },
-        { duration: '20ms', target: 0 },
+        { duration: '10s', target: 20 },
+        { duration: '10s', target: 50 },
+        { duration: '10s', target: 0 },
     ]
 };
 
