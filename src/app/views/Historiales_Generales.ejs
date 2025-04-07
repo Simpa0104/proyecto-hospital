@@ -91,7 +91,7 @@
                     <% } %>
         </div>
 
-        <script>
+        <script nonce="<%= nonce %>">
             document.addEventListener('DOMContentLoaded', function () {
                 console.log("Script de eliminación cargado correctamente");
 
@@ -107,17 +107,26 @@
                             return;
                         }
 
+                        const csrfToken = document.cookie
+                            .split('; ')
+                            .find(row => row.startsWith('XSRF-TOKEN='))
+                            ?.split('=')[1];
+
                         try {
                             const response = await fetch(`/eliminar-evaluacion/${id}`, {
                                 method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'x-xsrf-token': csrfToken
+                                }
                             });
+
                             const data = await response.json();
                             console.log("Respuesta del servidor:", data);
 
                             if (data.success) {
                                 alert("Evaluación eliminada correctamente");
-                                location.reload(); // Recarga la página para actualizar la lista
+                                location.reload();
                             } else {
                                 alert("Error al eliminar: " + data.message);
                             }
@@ -129,5 +138,6 @@
                 });
             });
         </script>
+
 
         <%- include('../includes/footer.ejs') %>

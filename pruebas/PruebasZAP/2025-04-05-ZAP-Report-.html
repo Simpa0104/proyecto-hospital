@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZAP por Informe de Escaneo Checkmarx</title>
+<link
+	href="2025-04-05-ZAP-Report-/normalize/normalize.css" rel="stylesheet">
+<link
+	href="2025-04-05-ZAP-Report-/themes/original/main.css" rel="stylesheet">
+<link
+	href="2025-04-05-ZAP-Report-/themes/original/colors.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<h1>ZAP por Informe de Escaneo Checkmarx</h1>
+		<p>
+			<span>Generated with</span> <a href="https://zaproxy.org"><img
+				src="2025-04-05-ZAP-Report-/zap32x32.png" alt="The ZAP logo" class="zap-logo">ZAP</a>
+			<span>on sáb 5 abr 2025, at 23:45:18</span>
+		</p>
+		<p>ZAP Versión: 2.16.1</p>
+		<p>
+			ZAP by <a href="https://checkmarx.com/">Checkmarx</a>
+		</p>
+	</header>
+
+	<main>
+
+		<section id="contents" class="contents">
+			<h2>Contents</h2>
+			<nav>
+				<ol>
+					<li><a
+						href="#about-this-report">About this report</a>
+						<ol>
+							
+							<li><a
+								href="#report-parameters">Report parameters</a></li>
+						</ol></li>
+					<data-th-block>
+					<li><a
+						href="#summaries">Summaries</a>
+						<ol>
+							<li><a
+								href="#risk-confidence-counts">Alert counts by risk and confidence</a></li>
+							<li><a
+								href="#site-risk-counts">Alert counts by site and risk</a></li>
+							<li><a
+								href="#alert-type-counts">Alert counts by alert type</a></li>
+						</ol></li>
+					<li><a
+						href="#alerts">Alerts</a>
+						<ol>
+							
+							 
+							
+							
+							
+							
+							<li><a
+								href="#alerts--risk-2-confidence-3"><span>Risk</span>=<span
+									class="risk-level">Medio</span>, <span>Confidence</span>=<span
+									class="confidence-level">Alta</span> <span>(4)</span></a></li>
+							
+							
+							
+							
+							  
+							
+							
+							
+							
+							
+							
+							<li><a
+								href="#alerts--risk-1-confidence-2"><span>Risk</span>=<span
+									class="risk-level">Bajo</span>, <span>Confidence</span>=<span
+									class="confidence-level">Media</span> <span>(4)</span></a></li>
+							
+							
+							  
+							
+							
+							
+							
+							
+							
+							<li><a
+								href="#alerts--risk-0-confidence-2"><span>Risk</span>=<span
+									class="risk-level">Informativo</span>, <span>Confidence</span>=<span
+									class="confidence-level">Media</span> <span>(1)</span></a></li>
+							
+							
+							  
+						</ol></li>
+					<li><a
+						href="#appendix">Appendix</a>
+						<ol>
+							<li><a
+								href="#alert-types">Alert types</a></li>
+						</ol></li>
+					</data-th-block>
+				</ol>
+			</nav>
+		</section>
+
+		<section
+			id="about-this-report" class="about-this-report">
+			<h2>About this report</h2>
+
+			
+
+			<section
+				id="report-parameters">
+				<h3>Report parameters</h3>
+				<div class="report-parameters--container">
+					<h4>Contexts</h4>
+					
+					
+					<p>No contexts were selected, so all contexts were included by default.</p>
+					  
+
+					<h4>Sites</h4>
+					
+					<p>The following sites were included:</p>
+					<ul class="sites-list">
+						<li><span class="site">http://localhost:3000</span></li>
+					</ul>
+					
+					<p>(If no sites were selected, all sites were included by default.)</p>
+					<p>An included site must also be within one of the included contexts for its data to be included in the report.</p>
+
+					<h4>Risk levels</h4>
+					<p>
+						<span>Included</span>:
+						 
+						<span class="included-risk-codes"><span class="risk-level">Alto</span>, <span class="risk-level">Medio</span>, <span class="risk-level">Bajo</span>, <span class="risk-level">Informativo</span></span>
+					</p>
+					<p>
+						<span>Excluded</span>:
+						 <span>None</span>
+						
+					</p>
+
+					<h4>Confidence levels</h4>
+					<p>
+						<span>Included</span>:
+						
+						
+						<span class="included-confidence-codes"><span class="confidence-level">Confirmado por Usuario</span>, <span class="confidence-level">Alta</span>, <span class="confidence-level">Media</span>, <span class="confidence-level">Baja</span></span>
+					</p>
+					<p>
+						<span>Excluded</span>:
+						
+						
+						<span class="included-confidence-codes"> <span class="confidence-level">Confirmado por Usuario</span>, <span class="confidence-level">Alta</span>, <span class="confidence-level">Media</span>, <span class="confidence-level">Baja</span>, <span class="confidence-level">Falso positivo</span></span>
+					</p>
+				</div>
+			</section>
+		</section>
+
+		
+		<section>
+			
+		</section>
+		
+		<section id="summaries" class="summaries">
+			<h2>Summaries</h2>
+
+			<section
+				id="risk-confidence-counts">
+				<h3>Alert counts by risk and confidence</h3>
+				<table class="risk-confidence-counts-table">
+					<caption>
+						<p>This table shows the number of alerts for each level of risk and confidence included in the report.</p>
+						<p>(The percentages in brackets represent the count as a percentage of the total number of alerts included in the report, rounded to one decimal place.)</p>
+					</caption>
+					<colgroup>
+						<col>
+						<col>
+					</colgroup>
+					<colgroup>
+						<col
+							style="width: 14.0%"><col
+							style="width: 14.0%"><col
+							style="width: 14.0%"><col
+							style="width: 14.0%">
+						<col style="width: 14.0%">
+					</colgroup>
+					<thead>
+						<tr>
+							<td colspan="2" rowspan="2"></td>
+							<th scope="colgroup"
+								colspan="5">Confidence</th>
+						</tr>
+						<tr>
+							<th scope="col">Confirmado por Usuario</th>
+							<th scope="col">Alta</th>
+							<th scope="col">Media</th>
+							<th scope="col">Baja</th>
+							<th scope="col">Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="rowgroup"
+								rowspan="5">Risk</th>
+							<th scope="row">Alto</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span class="additional-info-percentages">(0,0 %)</span></td>
+						</tr>
+						<tr>
+							
+							<th scope="row">Medio</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>4</span><br> <span
+								class="additional-info-percentages">(44,4 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>4</span><br> <span class="additional-info-percentages">(44,4 %)</span></td>
+						</tr>
+						<tr>
+							
+							<th scope="row">Bajo</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>4</span><br> <span
+								class="additional-info-percentages">(44,4 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>4</span><br> <span class="additional-info-percentages">(44,4 %)</span></td>
+						</tr>
+						<tr>
+							
+							<th scope="row">Informativo</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>1</span><br> <span
+								class="additional-info-percentages">(11,1 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>1</span><br> <span class="additional-info-percentages">(11,1 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row">Total</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>4</span><br> <span
+								class="additional-info-percentages">(44,4 %)</span></td>
+							<td><span>5</span><br> <span
+								class="additional-info-percentages">(55,6 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>9</span><br> <span
+								class="additional-info-percentages">(100%)</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section
+				id="site-risk-counts">
+				<h3>Alert counts by site and risk</h3>
+				<table class="site-risk-counts-table">
+					<caption>
+						<p>This table shows, for each site for which one or more alerts were raised, the number of alerts raised at each risk level.</p>
+						<p>Alerts with a confidence level of &quot;False Positive&quot; have been excluded from these counts.</p>
+						<p>(The numbers in brackets are the number of alerts raised for the site at or above that risk level.)</p>
+					</caption>
+					<colgroup>
+						<col>
+						<col>
+					</colgroup>
+					<colgroup>
+						<col
+							style="width: 16.25%"><col
+							style="width: 16.25%"><col
+							style="width: 16.25%"><col
+							style="width: 16.25%">
+					</colgroup>
+					<thead>
+						<tr>
+							<td colspan="2" rowspan="2"></td>
+							<th scope="colgroup" colspan="4">Risk</th>
+						</tr>
+						<tr>
+							<th scope="col">
+								<span>Alto</span><br>  <span
+									class="additional-info-percentages">(= Alto)</span>  
+							</th>
+							<th scope="col">
+								<span>Medio</span><br>   <span
+									class="additional-info-percentages">(&gt;= Medio)</span> 
+							</th>
+							<th scope="col">
+								<span>Bajo</span><br>   <span
+									class="additional-info-percentages">(&gt;= Bajo)</span> 
+							</th>
+							<th scope="col">
+								<span>Informativo</span><br>   <span
+									class="additional-info-percentages">(&gt;= Informativo)</span> 
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="rowgroup"
+								rowspan="1">Site</th>
+							<th scope="row">http://localhost:3000</th>
+							
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0)</span></td>
+							<td><span>4</span><br> <span
+								class="additional-info-percentages">(4)</span></td>
+							<td><span>4</span><br> <span
+								class="additional-info-percentages">(8)</span></td>
+							<td><span>1</span><br> <span
+								class="additional-info-percentages">(9)</span></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section
+				id="alert-type-counts">
+				<h3>Alert counts by alert type</h3>
+				<table class="alert-type-counts-table">
+					<caption>
+						<p>This table shows the number of alerts of each alert type, together with the alert type&#39;s risk level.</p>
+						<p>(The percentages in brackets represent each count as a percentage, rounded to one decimal place, of the total number of alerts included in this report.)</p>
+					</caption>
+					<thead>
+						<tr>
+							<th scope="col">Alert type</th>
+							<th scope="col">Risk</th>
+							<th scope="col">Count</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-0">CSP: Directiva Wildcard</a></th>
+							<td class="risk-level">Medio</td>
+							<td><span>18</span><br> <span
+								class="additional-info-percentages">(200,0 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-1">CSP: Failure to Define Directive with No Fallback</a></th>
+							<td class="risk-level">Medio</td>
+							<td><span>2</span><br> <span
+								class="additional-info-percentages">(22,2 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-2">CSP: script-src unsafe-inline</a></th>
+							<td class="risk-level">Medio</td>
+							<td><span>6</span><br> <span
+								class="additional-info-percentages">(66,7 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-3">CSP: style-src unsafe-inline</a></th>
+							<td class="risk-level">Medio</td>
+							<td><span>6</span><br> <span
+								class="additional-info-percentages">(66,7 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-4">Cookie Sin Flag HttpOnly</a></th>
+							<td class="risk-level">Bajo</td>
+							<td><span>11</span><br> <span
+								class="additional-info-percentages">(122,2 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-5">Cookie sin el atributo SameSite</a></th>
+							<td class="risk-level">Bajo</td>
+							<td><span>12</span><br> <span
+								class="additional-info-percentages">(133,3 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-6">Divulgación de error de aplicación</a></th>
+							<td class="risk-level">Bajo</td>
+							<td><span>2</span><br> <span
+								class="additional-info-percentages">(22,2 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-7">Inclusión de archivos fuente JavaScript entre dominios</a></th>
+							<td class="risk-level">Bajo</td>
+							<td><span>40</span><br> <span
+								class="additional-info-percentages">(444,4 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-8">Respuesta de Gestión de Sesión Identificada</a></th>
+							<td class="risk-level">Informativo</td>
+							<td><span>24</span><br> <span
+								class="additional-info-percentages">(266,7 %)</span></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th scope="row">Total</th>
+							<td></td>
+							<td>9</td>
+						</tr>
+					</tfoot>
+				</table>
+			</section>
+		</section>
+
+		<section id="alerts" class="alerts">
+			<h2>Alerts</h2>
+			<ol>
+				
+				 
+				 
+				
+				
+				<li id="alerts--risk-2-confidence-3">
+					<h3>
+						<span>Risk</span>=<span
+							class="risk-level">Medio</span>, <span>Confidence</span>=<span
+							class="confidence-level">Alta</span> <span>(4)</span>
+					</h3>
+					<ol>
+						
+						<li class="alerts--site-li">
+							<h4>
+								<span class="site">http://localhost:3000</span> <span>(4)</span>
+							</h4>
+							<ol>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-0">CSP: Directiva Wildcard</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET http://localhost:3000/Cuestionario_Riesgos</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://cwe.mitre.org/data/definitions/693.html">CWE-693</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP_2021_A05</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP_2017_A06</a></span> 
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>Content Security Policy (CSP) es una capa de seguridad añadida que ayuda a detectar y mitigar ciertos tipos de ataques. Incluyendo (pero no limitado a) Cross Site Scripting (XSS), y ataques de inyección de datos. Estos ataques se utilizan, para todo, desde el robo de datos a la desfiguración de sitios o la distribución de malware. CSP proporciona un conjunto de cabeceras HTTP estándar que permiten a los propietarios de sitios web declarar las fuentes de contenido aprobadas que los navegadores deberían poder cargar en esa página. Los tipos cubiertos son JavaScript, CSS, marcos HTML, fuentes, imágenes y objetos incrustables como applets Java, ActiveX y archivos de audio y vídeo.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Other info</th>
+		<td> 
+<p>Las siguientes directivas permiten fuentes comodín (o ancestros), no están definidas, o están definidas de forma demasiado amplia:</p>
+
+<p>img-src</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (426 bytes)</summary>
+				
+				<pre><code>GET http://localhost:3000/Cuestionario_Riesgos HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+referer: http://localhost:3000
+Cookie: XSRF-TOKEN=O2wJlcxF-2QkIKNXNTk7jPLIEbS3xTwwWf98; _csrfSecret=s%3Au8msveDp0IkHWGN_NUdQDie9.yOuKvL5zAK6npmY7paO2QX%2BZbZ2QfX72WNNI6EigUBI
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (1267 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 500 Internal Server Error
+Content-Security-Policy: default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: _csrfSecret=s%3Au8msveDp0IkHWGN_NUdQDie9.yOuKvL5zAK6npmY7paO2QX%2BZbZ2QfX72WNNI6EigUBI; Path=/; HttpOnly
+Set-Cookie: XSRF-TOKEN=J2gDlI6Z-l7E8FpGbgrk8h4jX1DM3jGg_y8Q; Path=/
+Content-Type: text/html; charset=utf-8
+Content-Length: 1494
+ETag: W/&quot;5d6-iFpPqQXUTu0onZAuDJThkLBYOVg&quot;
+Date: Sun, 06 Apr 2025 04:05:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+</code></pre>
+				
+				
+			</details> <details class="response-body" open="open">
+				<summary>Response body (1494 bytes)</summary>
+				
+				<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
+
+  &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;
+    integrity=&quot;sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6&quot; crossorigin=&quot;anonymous&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css&quot;&gt;
+
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;/imagenes/Ventana.jpg&quot; /&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/datatables.net-dt@1.11.5/css/jquery.dataTables.min.css&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;title&gt;Error&lt;/title&gt;
+
+&lt;div class=&quot;container mt-5&quot;&gt;
+    &lt;div class=&quot;alert alert-danger&quot;&gt;
+        &lt;h1&gt;Error interno del servidor&lt;/h1&gt;
+        
+        
+    &lt;/div&gt;
+    &lt;a href=&quot;/&quot; class=&quot;btn btn-primary&quot;&gt;Volver al inicio&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/datatables.net@1.11.5/js/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://kit.fontawesome.com/60275595f3.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>Content-Security-Policy</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Asegúrese de que su servidor web, servidor de aplicación, balanceador de carga, etc. está configurado apropiadamente para establecer la cabecera de Política de Seguridad de Contenido.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-1">CSP: Failure to Define Directive with No Fallback</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET http://localhost:3000/imagenes</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://cwe.mitre.org/data/definitions/693.html">CWE-693</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP_2021_A05</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP_2017_A06</a></span> 
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>The Content Security Policy fails to define one of the directives that has no fallback. Missing/excluding them is the same as allowing anything.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Other info</th>
+		<td> 
+<p>The directive(s): frame-ancestors, form-action is/are among the directives that do not fallback to default-src.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (237 bytes)</summary>
+				
+				<pre><code>GET http://localhost:3000/imagenes HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (685 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 301 Moved Permanently
+Content-Security-Policy: default-src &#39;none&#39;
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Content-Type: text/html; charset=UTF-8
+Content-Length: 158
+Location: /imagenes/
+Date: Sun, 06 Apr 2025 04:27:22 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+</code></pre>
+				
+				
+			</details> <details class="response-body" open="open">
+				<summary>Response body (158 bytes)</summary>
+				
+				<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Redirecting&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;pre&gt;Redirecting to /imagenes/&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>Content-Security-Policy</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>default-src &#39;none&#39;</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Asegúrese de que su servidor web, servidor de aplicación, balanceador de carga, etc. está configurado apropiadamente para establecer la cabecera de Política de Seguridad de Contenido.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-2">CSP: script-src unsafe-inline</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET http://localhost:3000/sitemap.xml</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://cwe.mitre.org/data/definitions/693.html">CWE-693</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP_2021_A05</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP_2017_A06</a></span> 
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>Content Security Policy (CSP) es una capa de seguridad añadida que ayuda a detectar y mitigar ciertos tipos de ataques. Incluyendo (pero no limitado a) Cross Site Scripting (XSS), y ataques de inyección de datos. Estos ataques se utilizan, para todo, desde el robo de datos a la desfiguración de sitios o la distribución de malware. CSP proporciona un conjunto de cabeceras HTTP estándar que permiten a los propietarios de sitios web declarar las fuentes de contenido aprobadas que los navegadores deberían poder cargar en esa página. Los tipos cubiertos son JavaScript, CSS, marcos HTML, fuentes, imágenes y objetos incrustables como applets Java, ActiveX y archivos de audio y vídeo.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Other info</th>
+		<td> 
+<p>script-src incluye unsafe-inline.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (240 bytes)</summary>
+				
+				<pre><code>GET http://localhost:3000/sitemap.xml HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (1255 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 404 Not Found
+Content-Security-Policy: default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: _csrfSecret=s%3ARsm2MDC3lBjUC1XFa-vktlLb.A89%2FYRMauxcfa8XVJJZeSjV1rM1aCknDIQ0QLs0vPQs; Path=/; HttpOnly
+Set-Cookie: XSRF-TOKEN=MHEgvb8G-PJOkRQylwB3qt5IRLO940l731BU; Path=/
+Content-Type: text/html; charset=utf-8
+Content-Length: 1558
+ETag: W/&quot;616-FgHA1xwpChFwgAI4NIG7cGEAins&quot;
+Date: Sun, 06 Apr 2025 04:05:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+</code></pre>
+				
+				
+			</details> <details class="response-body" open="open">
+				<summary>Response body (1558 bytes)</summary>
+				
+				<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
+
+  &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;
+    integrity=&quot;sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6&quot; crossorigin=&quot;anonymous&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css&quot;&gt;
+
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;/imagenes/Ventana.jpg&quot; /&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/datatables.net-dt@1.11.5/css/jquery.dataTables.min.css&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;title&gt;Error&lt;/title&gt;
+
+&lt;div class=&quot;container mt-5&quot;&gt;
+    &lt;div class=&quot;alert alert-danger&quot;&gt;
+        &lt;h1&gt;Página no encontrada&lt;/h1&gt;
+        
+            &lt;p&gt;Código de error: &lt;strong&gt;404&lt;/strong&gt;&lt;/p&gt;
+        
+        
+    &lt;/div&gt;
+    &lt;a href=&quot;/&quot; class=&quot;btn btn-primary&quot;&gt;Volver al inicio&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/datatables.net@1.11.5/js/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://kit.fontawesome.com/60275595f3.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>Content-Security-Policy</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Asegúrese de que su servidor web, servidor de aplicación, balanceador de carga, etc. está configurado apropiadamente para establecer la cabecera de Política de Seguridad de Contenido.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-3">CSP: style-src unsafe-inline</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET http://localhost:3000</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://cwe.mitre.org/data/definitions/693.html">CWE-693</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP_2021_A05</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP_2017_A06</a></span> 
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>Content Security Policy (CSP) es una capa de seguridad añadida que ayuda a detectar y mitigar ciertos tipos de ataques. Incluyendo (pero no limitado a) Cross Site Scripting (XSS), y ataques de inyección de datos. Estos ataques se utilizan, para todo, desde el robo de datos a la desfiguración de sitios o la distribución de malware. CSP proporciona un conjunto de cabeceras HTTP estándar que permiten a los propietarios de sitios web declarar las fuentes de contenido aprobadas que los navegadores deberían poder cargar en esa página. Los tipos cubiertos son JavaScript, CSS, marcos HTML, fuentes, imágenes y objetos incrustables como applets Java, ActiveX y archivos de audio y vídeo.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Other info</th>
+		<td> 
+<p>style-src incluye unsafe-inline.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (228 bytes)</summary>
+				
+				<pre><code>GET http://localhost:3000 HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (1248 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 200 OK
+Content-Security-Policy: default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: _csrfSecret=s%3ATAjE8g5uRBQaHIuknsd9UkNi.MUXkT6etGkk8%2BgQr4AsDAYLoPRRjNX3AEIo84rhRS1E; Path=/; HttpOnly
+Set-Cookie: XSRF-TOKEN=PdLlofLg-RSzZ-um4hxI7shCy3ENOIm1HSPQ; Path=/
+Content-Type: text/html; charset=utf-8
+Content-Length: 3062
+ETag: W/&quot;bf6-jheDcWxxvapp9gahWyXiBU6xl7Q&quot;
+Date: Sun, 06 Apr 2025 04:05:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+</code></pre>
+				
+				
+			</details> <details class="response-body">
+				<summary>Response body (3062 bytes)</summary>
+				
+				<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
+
+  &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;
+    integrity=&quot;sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6&quot; crossorigin=&quot;anonymous&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css&quot;&gt;
+
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;/imagenes/Ventana.jpg&quot; /&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/datatables.net-dt@1.11.5/css/jquery.dataTables.min.css&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;section&gt;
+    &lt;div class=&quot;row g-0&quot;&gt;
+        &lt;div class=&quot;col-lg-7 d-none d-lg-block&quot;&gt;
+            &lt;div id=&quot;carouselExampleIndicators&quot; class=&quot;carousel slide&quot; data-ride=&quot;carousel&quot;&gt;
+                &lt;div class=&quot;carousel-inner&quot;&gt;
+                    &lt;div class=&quot;carousel-item active&quot;&gt;
+                        &lt;img class=&quot;d-block w-100&quot; src=&quot;/imagenes/Carrusel_Inicio_1.jpg&quot; alt=&quot;First slide&quot;
+                            width=&quot;1000px&quot; height=&quot;760px&quot;&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;carousel-item&quot;&gt;
+                        &lt;img class=&quot;d-block w-100&quot; src=&quot;/imagenes/Carrusel_Inicio_2.jpg&quot; alt=&quot;Second slide&quot;
+                            width=&quot;1000px&quot; height=&quot;760px&quot;&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;col-lg-5 d-flex flex-column align-items-end min-vh-100 text-center&quot;&gt;
+            &lt;div class=&quot;px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100&quot;&gt;
+                &lt;img src=&quot;/imagenes/Logo.png&quot; class=&quot;img-fluid&quot; width=&quot;200px&quot; height=&quot;200px&quot; alt=&quot;Logo&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;px-lg-5 py-lg-4 p-4 w-100 align-self-center&quot;&gt;
+                &lt;h1 class=&quot;font-weight-bold mb-5&quot;&gt;Bienvenidos&lt;/h1&gt;
+                &lt;div class=&quot;d-flex justify-content-around&quot;&gt;
+                    &lt;a href=&quot;/Cuestionario_Riesgos&quot;
+                        class=&quot;btn btn-outline-dark text-decoration-none&quot;&gt;
+                        Ir al test
+                    &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;br&gt;
+                &lt;div class=&quot;d-flex justify-content-around&quot;&gt;
+                    &lt;a href=&quot;/Historial&quot; class=&quot;btn btn-outline-dark text-decoration-none&quot;&gt;
+                        Ir al Historial
+                    &lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/datatables.net@1.11.5/js/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://kit.fontawesome.com/60275595f3.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>Content-Security-Policy</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Asegúrese de que su servidor web, servidor de aplicación, balanceador de carga, etc. está configurado apropiadamente para establecer la cabecera de Política de Seguridad de Contenido.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+							</ol>
+						</li>
+						
+					</ol>
+				</li>
+				
+				
+				
+				
+				  
+				 
+				
+				
+				
+				
+				<li id="alerts--risk-1-confidence-2">
+					<h3>
+						<span>Risk</span>=<span
+							class="risk-level">Bajo</span>, <span>Confidence</span>=<span
+							class="confidence-level">Media</span> <span>(4)</span>
+					</h3>
+					<ol>
+						
+						<li class="alerts--site-li">
+							<h4>
+								<span class="site">http://localhost:3000</span> <span>(4)</span>
+							</h4>
+							<ol>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-4">Cookie Sin Flag HttpOnly</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET http://localhost:3000/sitemap.xml</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://cwe.mitre.org/data/definitions/1004.html">CWE-1004</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP_2021_A05</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP_2017_A06</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes">WSTG-v42-SESS-02</a></span> 
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>Se ha establecido una cookie sin el flag HttpOnly, lo que significa que JavaScript puede acceder a la cookie. Si un script malicioso puede ser ejecutado en esta página, entonces la cookie será accesible y puede ser transmitida a otro sitio. Si se trata de una cookie de sesión, el secuestro de sesión puede ser posible.</p>
+ </td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (240 bytes)</summary>
+				
+				<pre><code>GET http://localhost:3000/sitemap.xml HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (1255 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 404 Not Found
+Content-Security-Policy: default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: _csrfSecret=s%3ARsm2MDC3lBjUC1XFa-vktlLb.A89%2FYRMauxcfa8XVJJZeSjV1rM1aCknDIQ0QLs0vPQs; Path=/; HttpOnly
+Set-Cookie: XSRF-TOKEN=MHEgvb8G-PJOkRQylwB3qt5IRLO940l731BU; Path=/
+Content-Type: text/html; charset=utf-8
+Content-Length: 1558
+ETag: W/&quot;616-FgHA1xwpChFwgAI4NIG7cGEAins&quot;
+Date: Sun, 06 Apr 2025 04:05:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+</code></pre>
+				
+				
+			</details> <details class="response-body" open="open">
+				<summary>Response body (1558 bytes)</summary>
+				
+				<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
+
+  &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;
+    integrity=&quot;sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6&quot; crossorigin=&quot;anonymous&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css&quot;&gt;
+
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;/imagenes/Ventana.jpg&quot; /&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/datatables.net-dt@1.11.5/css/jquery.dataTables.min.css&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;title&gt;Error&lt;/title&gt;
+
+&lt;div class=&quot;container mt-5&quot;&gt;
+    &lt;div class=&quot;alert alert-danger&quot;&gt;
+        &lt;h1&gt;Página no encontrada&lt;/h1&gt;
+        
+            &lt;p&gt;Código de error: &lt;strong&gt;404&lt;/strong&gt;&lt;/p&gt;
+        
+        
+    &lt;/div&gt;
+    &lt;a href=&quot;/&quot; class=&quot;btn btn-primary&quot;&gt;Volver al inicio&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/datatables.net@1.11.5/js/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://kit.fontawesome.com/60275595f3.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>XSRF-TOKEN</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>Set-Cookie: XSRF-TOKEN</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Asegúrese de que la flag HttpOnly está establecida para todas las cookies.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-5">Cookie sin el atributo SameSite</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET http://localhost:3000/</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP_2021_A01</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control.html">OWASP_2017_A05</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes">WSTG-v42-SESS-02</a></span> 
+				</li>
+				<li>
+					<span><a href="https://cwe.mitre.org/data/definitions/1275.html">CWE-1275</a></span> 
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>Se ha establecido una cookie sin el atributo SameSite, lo que significa que la cookie puede ser enviada como resultado de una solicitud &#39;cross-site&#39;. El atributo SameSite es una medida eficaz para contrarrestar la falsificación de peticiones entre sitios, la inclusión de scripts entre sitios y los ataques de sincronización.</p>
+ </td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (418 bytes)</summary>
+				
+				<pre><code>GET http://localhost:3000/ HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+referer: http://localhost:3000/sitemap.xml
+Cookie: XSRF-TOKEN=O2wJlcxF-2QkIKNXNTk7jPLIEbS3xTwwWf98; _csrfSecret=s%3Au8msveDp0IkHWGN_NUdQDie9.yOuKvL5zAK6npmY7paO2QX%2BZbZ2QfX72WNNI6EigUBI
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (1248 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 200 OK
+Content-Security-Policy: default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: _csrfSecret=s%3Au8msveDp0IkHWGN_NUdQDie9.yOuKvL5zAK6npmY7paO2QX%2BZbZ2QfX72WNNI6EigUBI; Path=/; HttpOnly
+Set-Cookie: XSRF-TOKEN=rNvyG6Sv-KGRHd0CIhuUVMDnob88fB-vanaE; Path=/
+Content-Type: text/html; charset=utf-8
+Content-Length: 3062
+ETag: W/&quot;bf6-jheDcWxxvapp9gahWyXiBU6xl7Q&quot;
+Date: Sun, 06 Apr 2025 04:05:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+</code></pre>
+				
+				
+			</details> <details class="response-body">
+				<summary>Response body (3062 bytes)</summary>
+				
+				<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
+
+  &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;
+    integrity=&quot;sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6&quot; crossorigin=&quot;anonymous&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css&quot;&gt;
+
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;/imagenes/Ventana.jpg&quot; /&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/datatables.net-dt@1.11.5/css/jquery.dataTables.min.css&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;section&gt;
+    &lt;div class=&quot;row g-0&quot;&gt;
+        &lt;div class=&quot;col-lg-7 d-none d-lg-block&quot;&gt;
+            &lt;div id=&quot;carouselExampleIndicators&quot; class=&quot;carousel slide&quot; data-ride=&quot;carousel&quot;&gt;
+                &lt;div class=&quot;carousel-inner&quot;&gt;
+                    &lt;div class=&quot;carousel-item active&quot;&gt;
+                        &lt;img class=&quot;d-block w-100&quot; src=&quot;/imagenes/Carrusel_Inicio_1.jpg&quot; alt=&quot;First slide&quot;
+                            width=&quot;1000px&quot; height=&quot;760px&quot;&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;carousel-item&quot;&gt;
+                        &lt;img class=&quot;d-block w-100&quot; src=&quot;/imagenes/Carrusel_Inicio_2.jpg&quot; alt=&quot;Second slide&quot;
+                            width=&quot;1000px&quot; height=&quot;760px&quot;&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;col-lg-5 d-flex flex-column align-items-end min-vh-100 text-center&quot;&gt;
+            &lt;div class=&quot;px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100&quot;&gt;
+                &lt;img src=&quot;/imagenes/Logo.png&quot; class=&quot;img-fluid&quot; width=&quot;200px&quot; height=&quot;200px&quot; alt=&quot;Logo&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;px-lg-5 py-lg-4 p-4 w-100 align-self-center&quot;&gt;
+                &lt;h1 class=&quot;font-weight-bold mb-5&quot;&gt;Bienvenidos&lt;/h1&gt;
+                &lt;div class=&quot;d-flex justify-content-around&quot;&gt;
+                    &lt;a href=&quot;/Cuestionario_Riesgos&quot;
+                        class=&quot;btn btn-outline-dark text-decoration-none&quot;&gt;
+                        Ir al test
+                    &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;br&gt;
+                &lt;div class=&quot;d-flex justify-content-around&quot;&gt;
+                    &lt;a href=&quot;/Historial&quot; class=&quot;btn btn-outline-dark text-decoration-none&quot;&gt;
+                        Ir al Historial
+                    &lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/datatables.net@1.11.5/js/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://kit.fontawesome.com/60275595f3.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>_csrfSecret</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>Set-Cookie: _csrfSecret</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Asegúrese que el atributo SameSite está establecido como &#39;lax&#39; o idealmente &#39;strict&#39; para todas las cookies.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-6">Divulgación de error de aplicación</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET http://localhost:3000/Historial</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/08-Testing_for_Error_Handling/02-Testing_for_Stack_Traces">WSTG-v42-ERRH-02</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/08-Testing_for_Error_Handling/01-Testing_For_Improper_Error_Handling">WSTG-v42-ERRH-01</a></span> 
+				</li>
+				<li>
+					<span><a href="https://cwe.mitre.org/data/definitions/550.html">CWE-550</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP_2021_A05</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP_2017_A06</a></span> 
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>Esta página contiene un mensaje de error/advertencia que podría revelar información sensible como la ubicación del archivo que produjo la excepción no controlada. Esta información puede ser usada para lanzas futuros ataques contra la aplicación web. La alerta podría ser una falso positivo si el mensaje de error es encontrado dentro de una página de documentación.</p>
+ </td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (415 bytes)</summary>
+				
+				<pre><code>GET http://localhost:3000/Historial HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+referer: http://localhost:3000
+Cookie: XSRF-TOKEN=O2wJlcxF-2QkIKNXNTk7jPLIEbS3xTwwWf98; _csrfSecret=s%3Au8msveDp0IkHWGN_NUdQDie9.yOuKvL5zAK6npmY7paO2QX%2BZbZ2QfX72WNNI6EigUBI
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (1267 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 500 Internal Server Error
+Content-Security-Policy: default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: _csrfSecret=s%3Au8msveDp0IkHWGN_NUdQDie9.yOuKvL5zAK6npmY7paO2QX%2BZbZ2QfX72WNNI6EigUBI; Path=/; HttpOnly
+Set-Cookie: XSRF-TOKEN=irKpdmLR-Nz9rrynI3HqRdIfSF0-aqFSoWxA; Path=/
+Content-Type: text/html; charset=utf-8
+Content-Length: 1494
+ETag: W/&quot;5d6-iFpPqQXUTu0onZAuDJThkLBYOVg&quot;
+Date: Sun, 06 Apr 2025 04:05:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+</code></pre>
+				
+				
+			</details> <details class="response-body" open="open">
+				<summary>Response body (1494 bytes)</summary>
+				
+				<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
+
+  &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;
+    integrity=&quot;sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6&quot; crossorigin=&quot;anonymous&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css&quot;&gt;
+
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;/imagenes/Ventana.jpg&quot; /&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/datatables.net-dt@1.11.5/css/jquery.dataTables.min.css&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;title&gt;Error&lt;/title&gt;
+
+&lt;div class=&quot;container mt-5&quot;&gt;
+    &lt;div class=&quot;alert alert-danger&quot;&gt;
+        &lt;h1&gt;Error interno del servidor&lt;/h1&gt;
+        
+        
+    &lt;/div&gt;
+    &lt;a href=&quot;/&quot; class=&quot;btn btn-primary&quot;&gt;Volver al inicio&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/datatables.net@1.11.5/js/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://kit.fontawesome.com/60275595f3.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>HTTP/1.1 500 Internal Server Error</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Revisar el código de fuente de esta página. Implementación de páginas de error personalizadas. Considerar implementar un mecanismos para proveer una única referencia/identificación de error para el cliente (navegador) mientras insertando los detalles en el sitio del navegador y no exponiéndolos al usuario.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-7">Inclusión de archivos fuente JavaScript entre dominios</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET http://localhost:3000/</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/">OWASP_2021_A08</a></span> 
+				</li>
+				<li>
+					<span><a href="https://cwe.mitre.org/data/definitions/829.html">CWE-829</a></span> 
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>La página incluye uno o más archivos de script de un dominio de terceros.</p>
+ </td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (418 bytes)</summary>
+				
+				<pre><code>GET http://localhost:3000/ HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+referer: http://localhost:3000/sitemap.xml
+Cookie: XSRF-TOKEN=O2wJlcxF-2QkIKNXNTk7jPLIEbS3xTwwWf98; _csrfSecret=s%3Au8msveDp0IkHWGN_NUdQDie9.yOuKvL5zAK6npmY7paO2QX%2BZbZ2QfX72WNNI6EigUBI
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (1248 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 200 OK
+Content-Security-Policy: default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: _csrfSecret=s%3Au8msveDp0IkHWGN_NUdQDie9.yOuKvL5zAK6npmY7paO2QX%2BZbZ2QfX72WNNI6EigUBI; Path=/; HttpOnly
+Set-Cookie: XSRF-TOKEN=rNvyG6Sv-KGRHd0CIhuUVMDnob88fB-vanaE; Path=/
+Content-Type: text/html; charset=utf-8
+Content-Length: 3062
+ETag: W/&quot;bf6-jheDcWxxvapp9gahWyXiBU6xl7Q&quot;
+Date: Sun, 06 Apr 2025 04:05:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+</code></pre>
+				
+				
+			</details> <details class="response-body">
+				<summary>Response body (3062 bytes)</summary>
+				
+				<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
+
+  &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;
+    integrity=&quot;sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6&quot; crossorigin=&quot;anonymous&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css&quot;&gt;
+
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;/imagenes/Ventana.jpg&quot; /&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/datatables.net-dt@1.11.5/css/jquery.dataTables.min.css&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;section&gt;
+    &lt;div class=&quot;row g-0&quot;&gt;
+        &lt;div class=&quot;col-lg-7 d-none d-lg-block&quot;&gt;
+            &lt;div id=&quot;carouselExampleIndicators&quot; class=&quot;carousel slide&quot; data-ride=&quot;carousel&quot;&gt;
+                &lt;div class=&quot;carousel-inner&quot;&gt;
+                    &lt;div class=&quot;carousel-item active&quot;&gt;
+                        &lt;img class=&quot;d-block w-100&quot; src=&quot;/imagenes/Carrusel_Inicio_1.jpg&quot; alt=&quot;First slide&quot;
+                            width=&quot;1000px&quot; height=&quot;760px&quot;&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;carousel-item&quot;&gt;
+                        &lt;img class=&quot;d-block w-100&quot; src=&quot;/imagenes/Carrusel_Inicio_2.jpg&quot; alt=&quot;Second slide&quot;
+                            width=&quot;1000px&quot; height=&quot;760px&quot;&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;col-lg-5 d-flex flex-column align-items-end min-vh-100 text-center&quot;&gt;
+            &lt;div class=&quot;px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100&quot;&gt;
+                &lt;img src=&quot;/imagenes/Logo.png&quot; class=&quot;img-fluid&quot; width=&quot;200px&quot; height=&quot;200px&quot; alt=&quot;Logo&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;px-lg-5 py-lg-4 p-4 w-100 align-self-center&quot;&gt;
+                &lt;h1 class=&quot;font-weight-bold mb-5&quot;&gt;Bienvenidos&lt;/h1&gt;
+                &lt;div class=&quot;d-flex justify-content-around&quot;&gt;
+                    &lt;a href=&quot;/Cuestionario_Riesgos&quot;
+                        class=&quot;btn btn-outline-dark text-decoration-none&quot;&gt;
+                        Ir al test
+                    &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;br&gt;
+                &lt;div class=&quot;d-flex justify-content-around&quot;&gt;
+                    &lt;a href=&quot;/Historial&quot; class=&quot;btn btn-outline-dark text-decoration-none&quot;&gt;
+                        Ir al Historial
+                    &lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/datatables.net@1.11.5/js/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://kit.fontawesome.com/60275595f3.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Asegúrese de que los archivos fuente JavaScript se cargan solo desde fuentes de confianza, y que las fuentes no pueden ser controladas por los usuarios finales de la aplicación.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+							</ol>
+						</li>
+						
+					</ol>
+				</li>
+				
+				
+				  
+				 
+				
+				
+				
+				
+				<li id="alerts--risk-0-confidence-2">
+					<h3>
+						<span>Risk</span>=<span
+							class="risk-level">Informativo</span>, <span>Confidence</span>=<span
+							class="confidence-level">Media</span> <span>(1)</span>
+					</h3>
+					<ol>
+						
+						<li class="alerts--site-li">
+							<h4>
+								<span class="site">http://localhost:3000</span> <span>(1)</span>
+							</h4>
+							<ol>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-8">Respuesta de Gestión de Sesión Identificada</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET http://localhost:3000</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>Se ha identificado que la respuesta dada contiene un token de gestión de sesión. El campo &#39;Other Info&#39; contiene un conjunto de tokens de cabecera que pueden utilizarse en el método Header Based Session Management (gestión de sesión basado en cabecera). Si la petición se encuentra en un contexto que tiene un método Session Management establecido en &quot;Auto-Detect&quot;, esta regla cambiará la gestión de sesión para utilizar los tokens identificados.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Other info</th>
+		<td> 
+<p>cookie:XSRF-TOKEN</p>
+
+<p>cookie:_csrfSecret</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (228 bytes)</summary>
+				
+				<pre><code>GET http://localhost:3000 HTTP/1.1
+host: localhost:3000
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+pragma: no-cache
+cache-control: no-cache
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (1248 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 200 OK
+Content-Security-Policy: default-src &#39;self&#39;;script-src &#39;self&#39; cdn.jsdelivr.net kit.fontawesome.com &#39;unsafe-inline&#39;;style-src &#39;self&#39; cdn.jsdelivr.net fonts.googleapis.com &#39;unsafe-inline&#39;;font-src &#39;self&#39; ka-f.fontawesome.com fonts.gstatic.com;connect-src &#39;self&#39;;img-src &#39;self&#39; https: data:;object-src &#39;none&#39;;base-uri &#39;self&#39;;form-action &#39;self&#39;;frame-ancestors &#39;self&#39;;script-src-attr &#39;none&#39;;upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: _csrfSecret=s%3ATAjE8g5uRBQaHIuknsd9UkNi.MUXkT6etGkk8%2BgQr4AsDAYLoPRRjNX3AEIo84rhRS1E; Path=/; HttpOnly
+Set-Cookie: XSRF-TOKEN=PdLlofLg-RSzZ-um4hxI7shCy3ENOIm1HSPQ; Path=/
+Content-Type: text/html; charset=utf-8
+Content-Length: 3062
+ETag: W/&quot;bf6-jheDcWxxvapp9gahWyXiBU6xl7Q&quot;
+Date: Sun, 06 Apr 2025 04:05:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+</code></pre>
+				
+				
+			</details> <details class="response-body">
+				<summary>Response body (3062 bytes)</summary>
+				
+				<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
+
+  &lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;
+    integrity=&quot;sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6&quot; crossorigin=&quot;anonymous&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css&quot;&gt;
+
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;/imagenes/Ventana.jpg&quot; /&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/datatables.net-dt@1.11.5/css/jquery.dataTables.min.css&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;section&gt;
+    &lt;div class=&quot;row g-0&quot;&gt;
+        &lt;div class=&quot;col-lg-7 d-none d-lg-block&quot;&gt;
+            &lt;div id=&quot;carouselExampleIndicators&quot; class=&quot;carousel slide&quot; data-ride=&quot;carousel&quot;&gt;
+                &lt;div class=&quot;carousel-inner&quot;&gt;
+                    &lt;div class=&quot;carousel-item active&quot;&gt;
+                        &lt;img class=&quot;d-block w-100&quot; src=&quot;/imagenes/Carrusel_Inicio_1.jpg&quot; alt=&quot;First slide&quot;
+                            width=&quot;1000px&quot; height=&quot;760px&quot;&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;carousel-item&quot;&gt;
+                        &lt;img class=&quot;d-block w-100&quot; src=&quot;/imagenes/Carrusel_Inicio_2.jpg&quot; alt=&quot;Second slide&quot;
+                            width=&quot;1000px&quot; height=&quot;760px&quot;&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;col-lg-5 d-flex flex-column align-items-end min-vh-100 text-center&quot;&gt;
+            &lt;div class=&quot;px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100&quot;&gt;
+                &lt;img src=&quot;/imagenes/Logo.png&quot; class=&quot;img-fluid&quot; width=&quot;200px&quot; height=&quot;200px&quot; alt=&quot;Logo&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;px-lg-5 py-lg-4 p-4 w-100 align-self-center&quot;&gt;
+                &lt;h1 class=&quot;font-weight-bold mb-5&quot;&gt;Bienvenidos&lt;/h1&gt;
+                &lt;div class=&quot;d-flex justify-content-around&quot;&gt;
+                    &lt;a href=&quot;/Cuestionario_Riesgos&quot;
+                        class=&quot;btn btn-outline-dark text-decoration-none&quot;&gt;
+                        Ir al test
+                    &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;br&gt;
+                &lt;div class=&quot;d-flex justify-content-around&quot;&gt;
+                    &lt;a href=&quot;/Historial&quot; class=&quot;btn btn-outline-dark text-decoration-none&quot;&gt;
+                        Ir al Historial
+                    &lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/datatables.net@1.11.5/js/jquery.dataTables.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://kit.fontawesome.com/60275595f3.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>XSRF-TOKEN</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>PdLlofLg-RSzZ-um4hxI7shCy3ENOIm1HSPQ</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Se trata de una alerta informativa y no de una vulnerabilidad, por lo que no hay nada que corregir.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+							</ol>
+						</li>
+						
+					</ol>
+				</li>
+				
+				
+				  
+			</ol>
+		</section>
+
+		<section id="appendix" class="appendix">
+			<h2>Appendix</h2>
+
+			<section id="alert-types" class="alert-types">
+				<h3>Alert types</h3>
+				<p class="alert-types-intro">This section contains additional information on the types of alerts in the report.</p>
+				<ol>
+					<li
+						id="alert-type-0">
+						<h4>CSP: Directiva Wildcard</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10055/">CSP</a>)
+									</span>   
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">CWE ID</th>
+								<td><a
+									href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
+							</tr>
+							<tr>
+								<th scope="row">WASC ID</th>
+								<td>15</td>
+							</tr>
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a></li>
+										<li><a
+											href="https://caniuse.com/#search=content+security+policy">https://caniuse.com/#search=content+security+policy</a></li>
+										<li><a
+											href="https://content-security-policy.com/">https://content-security-policy.com/</a></li>
+										<li><a
+											href="https://github.com/HtmlUnit/htmlunit-csp">https://github.com/HtmlUnit/htmlunit-csp</a></li>
+										<li><a
+											href="https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources">https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+					<li
+						id="alert-type-1">
+						<h4>CSP: Failure to Define Directive with No Fallback</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10055/">CSP</a>)
+									</span>   
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">CWE ID</th>
+								<td><a
+									href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
+							</tr>
+							<tr>
+								<th scope="row">WASC ID</th>
+								<td>15</td>
+							</tr>
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a></li>
+										<li><a
+											href="https://caniuse.com/#search=content+security+policy">https://caniuse.com/#search=content+security+policy</a></li>
+										<li><a
+											href="https://content-security-policy.com/">https://content-security-policy.com/</a></li>
+										<li><a
+											href="https://github.com/HtmlUnit/htmlunit-csp">https://github.com/HtmlUnit/htmlunit-csp</a></li>
+										<li><a
+											href="https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources">https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+					<li
+						id="alert-type-2">
+						<h4>CSP: script-src unsafe-inline</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10055/">CSP</a>)
+									</span>   
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">CWE ID</th>
+								<td><a
+									href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
+							</tr>
+							<tr>
+								<th scope="row">WASC ID</th>
+								<td>15</td>
+							</tr>
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a></li>
+										<li><a
+											href="https://caniuse.com/#search=content+security+policy">https://caniuse.com/#search=content+security+policy</a></li>
+										<li><a
+											href="https://content-security-policy.com/">https://content-security-policy.com/</a></li>
+										<li><a
+											href="https://github.com/HtmlUnit/htmlunit-csp">https://github.com/HtmlUnit/htmlunit-csp</a></li>
+										<li><a
+											href="https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources">https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+					<li
+						id="alert-type-3">
+						<h4>CSP: style-src unsafe-inline</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10055/">CSP</a>)
+									</span>   
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">CWE ID</th>
+								<td><a
+									href="https://cwe.mitre.org/data/definitions/693.html">693</a></td>
+							</tr>
+							<tr>
+								<th scope="row">WASC ID</th>
+								<td>15</td>
+							</tr>
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a></li>
+										<li><a
+											href="https://caniuse.com/#search=content+security+policy">https://caniuse.com/#search=content+security+policy</a></li>
+										<li><a
+											href="https://content-security-policy.com/">https://content-security-policy.com/</a></li>
+										<li><a
+											href="https://github.com/HtmlUnit/htmlunit-csp">https://github.com/HtmlUnit/htmlunit-csp</a></li>
+										<li><a
+											href="https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources">https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+					<li
+						id="alert-type-4">
+						<h4>Cookie Sin Flag HttpOnly</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10010/">Cookie Sin Flag HttpOnly</a>)
+									</span>   
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">CWE ID</th>
+								<td><a
+									href="https://cwe.mitre.org/data/definitions/1004.html">1004</a></td>
+							</tr>
+							<tr>
+								<th scope="row">WASC ID</th>
+								<td>13</td>
+							</tr>
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://owasp.org/www-community/HttpOnly">https://owasp.org/www-community/HttpOnly</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+					<li
+						id="alert-type-5">
+						<h4>Cookie sin el atributo SameSite</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10054/">Cookie sin el atributo SameSite</a>)
+									</span>   
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">CWE ID</th>
+								<td><a
+									href="https://cwe.mitre.org/data/definitions/1275.html">1275</a></td>
+							</tr>
+							<tr>
+								<th scope="row">WASC ID</th>
+								<td>13</td>
+							</tr>
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site">https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+					<li
+						id="alert-type-6">
+						<h4>Divulgación de error de aplicación</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/90022/">Divulgación de error de aplicación</a>)
+									</span>   
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">CWE ID</th>
+								<td><a
+									href="https://cwe.mitre.org/data/definitions/550.html">550</a></td>
+							</tr>
+							<tr>
+								<th scope="row">WASC ID</th>
+								<td>13</td>
+							</tr>
+							
+						</table>
+					</li>
+					<li
+						id="alert-type-7">
+						<h4>Inclusión de archivos fuente JavaScript entre dominios</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10017/">Inclusión de archivos fuente JavaScript entre dominios</a>)
+									</span>   
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">CWE ID</th>
+								<td><a
+									href="https://cwe.mitre.org/data/definitions/829.html">829</a></td>
+							</tr>
+							<tr>
+								<th scope="row">WASC ID</th>
+								<td>15</td>
+							</tr>
+							
+						</table>
+					</li>
+					<li
+						id="alert-type-8">
+						<h4>Respuesta de Gestión de Sesión Identificada</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10112/">Respuesta de Gestión de Sesión Identificada</a>)
+									</span>   
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id">https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+				</ol>
+			</section>
+		</section>
+		 
+	</main>
+</body>
+</html>
+
+
+

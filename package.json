@@ -22,8 +22,10 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "bootstrap-icons": "^1.11.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "crypto": "^1.0.1",
+    "csrf": "^3.1.0",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
@@ -32,9 +34,9 @@
     "mysql2": "^3.13.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.24.0",
     "@playwright/test": "^1.51.1",
-    "eslint": "^9.23.0",
-    "eslint-plugin-security": "^3.0.1",
+    "globals": "^16.0.0",
     "jest": "^29.7.0",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3",

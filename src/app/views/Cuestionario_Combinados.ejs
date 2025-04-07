@@ -1,115 +1,134 @@
 <%- include('../includes/head.ejs') %>
-<title>Test de Riesgo - Nivel 1 y Nivel 2</title>
-<%- include('../includes/contacto.ejs') %>
+    <title>Test de Riesgo - Nivel 1 y Nivel 2</title>
+    <%- include('../includes/contacto.ejs') %>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <form id="testForm" method="POST" action="/Cuestionario_Niveles">
-                <h1 class="text-center mb-4">Detección de Riesgo - Nivel 1 y 2</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form id="testForm" method="POST" action="/Cuestionario_Niveles">
+                        <h1 class="text-center mb-4">Detección de Riesgo - Nivel 1 y 2</h1>
 
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h4 class="card-title">Datos del Paciente</h4>
-                        <div class="mb-3">
-                            <label class="form-label">Nombre completo</label>
-                            <input type="text" class="form-control" name="nombre" required>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h4 class="card-title">Datos del Paciente</h4>
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre completo</label>
+                                    <input type="text" class="form-control" name="nombre" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Número de episodio</label>
+                                    <input type="number" class="form-control" name="episodio" min="1" required>
+                                </div>
+                            </div>
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Número de episodio</label>
-                            <input type="number" class="form-control" name="episodio" min="1" required>
-                        </div>
-                    </div>
+
+                        <% const preguntas1=[ { num: 1, texto: "Niño(a)s y adolescentes..." }, { num: 2,
+                            texto: "Gestantes y puérperas..." }, { num: 3, texto: "Oncología y cuidado paliativo" }, {
+                            num: 4, texto: "Pacientes con quemaduras" }, { num: 5, texto: "Pacientes en cuidado crítico"
+                            }, { num: 6, texto: "Pacientes con diagnóstico mental" } ]; %>
+
+                            <h4 class="mt-4 mb-3">Nivel 1 - Evaluación Inicial (Sí/No)</h4>
+                            <% preguntas1.forEach(p=> { %>
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Pregunta <%= p.num %>
+                                        </h5>
+                                        <p class="card-text">
+                                            <%= p.texto %>
+                                        </p>
+                                        <div class="btn-group w-100" role="group">
+                                            <input type="radio" class="btn-check" name="pregunta<%= p.num %>"
+                                                id="p<%= p.num %>-si" value="1" required>
+                                            <label class="btn btn-outline-success" for="p<%= p.num %>-si">Sí</label>
+
+                                            <input type="radio" class="btn-check" name="pregunta<%= p.num %>"
+                                                id="p<%= p.num %>-no" value="0" required>
+                                            <label class="btn btn-outline-danger" for="p<%= p.num %>-no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }); %>
+
+                                    <% const preguntas2=[ { num: 7, texto: "Ansiedad o ánimo deprimido" }, { num: 8,
+                                        texto: "Adherencia a tratamientos" }, { num: 9,
+                                        texto: "Hospitalizaciones recientes" }, { num: 10,
+                                        texto: "Autorización de asegurador" }, { num: 11,
+                                        texto: "Lugar y apoyo post-egreso" }, { num: 12,
+                                        texto: "Acompañante durante hospitalización" } ]; %>
+
+                                        <h4 class="mt-4 mb-3">Nivel 2 - Evaluación Detallada</h4>
+                                        <% preguntas2.forEach(p=> { %>
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Pregunta <%= p.num %>
+                                                    </h5>
+                                                    <p class="card-text">
+                                                        <%= p.texto %>
+                                                    </p>
+                                                    <div class="btn-group w-100" role="group">
+                                                        <input type="radio" class="btn-check"
+                                                            name="pregunta<%= p.num %>" id="p<%= p.num %>-2" value="2"
+                                                            required>
+                                                        <label class="btn btn-outline-success"
+                                                            for="p<%= p.num %>-2">Siempre</label>
+
+                                                        <input type="radio" class="btn-check"
+                                                            name="pregunta<%= p.num %>" id="p<%= p.num %>-1" value="1"
+                                                            required>
+                                                        <label class="btn btn-outline-warning"
+                                                            for="p<%= p.num %>-1">Ocasional</label>
+
+                                                        <input type="radio" class="btn-check"
+                                                            name="pregunta<%= p.num %>" id="p<%= p.num %>-0" value="0"
+                                                            required>
+                                                        <label class="btn btn-outline-danger"
+                                                            for="p<%= p.num %>-0">Nunca</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% }); %>
+
+                                                <button type="submit"
+                                                    class="btn btn-primary btn-lg w-100 mt-4">Finalizar
+                                                    Evaluación</button>
+                    </form>
                 </div>
-
-                <% const preguntas1 = [
-                    { num: 1, texto: "Niño(a)s y adolescentes..." },
-                    { num: 2, texto: "Gestantes y puérperas..." },
-                    { num: 3, texto: "Oncología y cuidado paliativo" },
-                    { num: 4, texto: "Pacientes con quemaduras" },
-                    { num: 5, texto: "Pacientes en cuidado crítico" },
-                    { num: 6, texto: "Pacientes con diagnóstico mental" }
-                ]; %>
-                
-                <h4 class="mt-4 mb-3">Nivel 1 - Evaluación Inicial (Sí/No)</h4>
-                <% preguntas1.forEach(p => { %>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Pregunta <%= p.num %></h5>
-                            <p class="card-text"><%= p.texto %></p>
-                            <div class="btn-group w-100" role="group">
-                                <input type="radio" class="btn-check" name="pregunta<%= p.num %>" id="p<%= p.num %>-si" value="1" required>
-                                <label class="btn btn-outline-success" for="p<%= p.num %>-si">Sí</label>
-                                
-                                <input type="radio" class="btn-check" name="pregunta<%= p.num %>" id="p<%= p.num %>-no" value="0" required>
-                                <label class="btn btn-outline-danger" for="p<%= p.num %>-no">No</label>
-                            </div>
-                        </div>
-                    </div>
-                <% }); %>
-
-                <% const preguntas2 = [
-                    { num: 7, texto: "Ansiedad o ánimo deprimido" },
-                    { num: 8, texto: "Adherencia a tratamientos" },
-                    { num: 9, texto: "Hospitalizaciones recientes" },
-                    { num: 10, texto: "Autorización de asegurador" },
-                    { num: 11, texto: "Lugar y apoyo post-egreso" },
-                    { num: 12, texto: "Acompañante durante hospitalización" }
-                ]; %>
-                
-                <h4 class="mt-4 mb-3">Nivel 2 - Evaluación Detallada</h4>
-                <% preguntas2.forEach(p => { %>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Pregunta <%= p.num %></h5>
-                            <p class="card-text"><%= p.texto %></p>
-                            <div class="btn-group w-100" role="group">
-                                <input type="radio" class="btn-check" name="pregunta<%= p.num %>" id="p<%= p.num %>-2" value="2" required>
-                                <label class="btn btn-outline-success" for="p<%= p.num %>-2">Siempre</label>
-                                
-                                <input type="radio" class="btn-check" name="pregunta<%= p.num %>" id="p<%= p.num %>-1" value="1" required>
-                                <label class="btn btn-outline-warning" for="p<%= p.num %>-1">Ocasional</label>
-                                
-                                <input type="radio" class="btn-check" name="pregunta<%= p.num %>" id="p<%= p.num %>-0" value="0" required>
-                                <label class="btn btn-outline-danger" for="p<%= p.num %>-0">Nunca</label>
-                            </div>
-                        </div>
-                    </div>
-                <% }); %>
-
-                <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">Finalizar Evaluación</button>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
-<script>
-    document.getElementById('testForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        try {
-            const response = await fetch(e.target.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'application/json'
-                },
-                body: new URLSearchParams(new FormData(e.target))
+        <script nonce="<%= nonce %>">
+            document.getElementById('testForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                try {
+                    const response = await fetch(e.target.action, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Accept': 'application/json'
+                        },
+                        body: new URLSearchParams(new FormData(e.target))
+                    });
+
+                    const data = await response.json();
+                    console.log('Respuesta del servidor:', data); // 👈 Para depurar
+
+                    if (!response.ok || !data.success) {
+                        throw new Error(data.error || 'Error en el servidor');
+                    }
+
+                    // Redirigir a la URL proporcionada
+                    console.log('Redirigiendo a:', data.nextUrl); // 👈 Verifica que se imprima
+                    window.location.href = data.nextUrl;
+
+                } catch (error) {
+                    console.error('Error al enviar el formulario:', error);
+                    alert('Hubo un problema al procesar el formulario: ' + error.message);
+                }
             });
-    
-            const data = await response.json();
-            
-            if (!response.ok || !data.success) {
-                throw new Error(data.error || 'Error en el servidor');
-            }
-    
-            window.location.href = data.nextUrl;
-    
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Error al enviar el formulario: ' + error.message);
-        }
-    });
-    </script>
+        </script>
 
-<%- include('../includes/footer.ejs') %>
+        </body>
+
+        <%- include('../includes/footer.ejs') %>

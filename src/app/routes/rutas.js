@@ -11,15 +11,19 @@ router.get('/', (req, res) => {
 
 // Mostrar formulario
 router.get('/Cuestionario_Riesgos', (req, res) => {
-    res.render('Cuestionario_Combinados');
+    res.render('Cuestionario_Combinados', {
+        csrfToken: req.csrfToken()
+    });
 });
 
+// Procesar evaluación
 // Procesar evaluación
 router.post('/Cuestionario_Niveles', [
     body('nombre')
         .notEmpty().withMessage('El nombre es requerido')
         .matches(/^[a-zA-Z\s]+$/).withMessage('El nombre solo debe contener letras y espacios'),
-    body('episodio').isInt({ min: 1 }).withMessage('Episodio debe ser un número válido')
+    body('episodio')
+        .isInt({ min: 1 }).withMessage('Episodio debe ser un número válido')
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -30,10 +34,19 @@ router.post('/Cuestionario_Niveles', [
         const { nombre, episodio } = req.body;
         let psico = 0, bio = 0, social = 0;
 
+        // Verificar que todas las preguntas del 1 al 12 estén respondidas
+        for (let i = 1; i <= 12; i++) {
+            if (typeof req.body[`pregunta${i}`] === 'undefined') {
+                return res.status(400).json({ error: `Pregunta ${i} no fue respondida.` });
+            }
+        }
+
+        // Sumar respuestas del Nivel 1 (preguntas 1 a 6) → biológico
         for (let i = 1; i <= 6; i++) {
             bio += parseInt(req.body[`pregunta${i}`]) || 0;
         }
 
+        // Sumar respuestas del Nivel 2 (preguntas 7 a 12) → distribuido en psico, bio y social
         for (let i = 7; i <= 12; i++) {
             const valor = parseInt(req.body[`pregunta${i}`]) || 0;
             if (i <= 8) psico += valor;
@@ -41,6 +54,7 @@ router.post('/Cuestionario_Niveles', [
             else social += valor;
         }
 
+        // Umbrales de riesgo
         const umbralPsico = 0.35 * 8;
         const umbralBio = 0.35 * 16;
         const umbralSocial = 0.35 * 4;
@@ -51,21 +65,27 @@ router.post('/Cuestionario_Niveles', [
         if (bio >= umbralBio) categoriasRiesgo.push("Biológico");
         if (social >= umbralSocial) categoriasRiesgo.push("Social");
 
-        const categoriaTexto = categoriasRiesgo.length > 0 ?
-            categoriasRiesgo.join(', ') : 'Ninguno';
+        const categoriaTexto = categoriasRiesgo.length > 0 ? categoriasRiesgo.join(', ') : 'Ninguno';
 
+        // Guardar en la base de datos
         const [result] = await pool.execute(
             `INSERT INTO evaluaciones 
-            (nombre, episodio, fecha, categoria, psico, bio, social) 
-            VALUES (?, ?, CURDATE(), ?, ?, ?, ?)`,
+             (nombre, episodio, fecha, categoria, psico, bio, social) 
+             VALUES (?, ?, CURDATE(), ?, ?, ?, ?)`,
             [nombre, episodio, categoriaTexto, psico, bio, social]
         );
 
-        res.redirect("/");
+        // Enviar respuesta exitosa
+        res.json({
+            success: true,
+            nextUrl: `/Detalles_Evaluacion/${result.insertId}`
+        });
+        return;
 
     } catch (error) {
         console.error('Error en formulario combinado:', error);
         res.status(500).json({ error: 'Error del servidor' });
+        return;
     }
 });
 
@@ -78,7 +98,10 @@ router.get('/Detalles_Evaluacion/:id', async (req, res) => {
         );
 
         if (evaluacion.length === 0) {
-            return res.status(404).render('error', { mensaje: 'Evaluación no encontrada' });
+            return res.status(404).render('error', {
+                mensaje: 'Evaluación no encontrada',
+                error: {}
+            });
         }
 
         // Convertir el texto de categoría a array
@@ -108,7 +131,10 @@ router.get('/Historial', async (req, res) => {
                 e.categoria.split(', ') : [];
         });
 
-        res.render('Historiales_Generales', { evaluaciones });
+        res.render('Historiales_Generales', {
+            evaluaciones,
+            csrfToken: req.csrfToken()
+        });
     } catch (error) {
         console.error(error);
         res.status(500).render('error', { mensaje: 'Error del servidor' });
@@ -124,7 +150,11 @@ router.post('/eliminar-evaluacion/:id', async (req, res) => {
         );
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ success: false, message: "Evaluación no encontrada" });
+            return res.status(404).json({
+                success: false,
+                message: "Evaluación no encontrada",
+                error: {}
+            });
         }
 
         res.json({ success: true });
