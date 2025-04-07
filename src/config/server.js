@@ -32,6 +32,7 @@ app.use(
           "'self'",
           "cdn.jsdelivr.net",
           "kit.fontawesome.com",
+          "'https://cdnjs.cloudflare.com'",
           (req, res) => `'nonce-${res.locals.nonce}'`
         ],
         styleSrc: [
@@ -40,6 +41,7 @@ app.use(
           "fonts.googleapis.com",
           "cdnjs.cloudflare.com",
           "fonts.googleapis.com",
+          "'unsafe-hashes'",
           (req, res) => `'nonce-${res.locals.nonce}'`
         ],
         fontSrc: [

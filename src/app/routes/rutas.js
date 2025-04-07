@@ -121,9 +121,34 @@ router.get('/Detalles_Evaluacion/:id', async (req, res) => {
 // Mostrar historial
 router.get('/Historial', async (req, res) => {
     try {
-        const [evaluaciones] = await pool.execute(
-            'SELECT * FROM evaluaciones ORDER BY fecha DESC'
-        );
+        const { nombre, episodio, categoria } = req.query;
+
+        let query = 'SELECT * FROM evaluaciones';
+        let conditions = [];
+        let params = [];
+
+        if (nombre) {
+            conditions.push('nombre LIKE ?');
+            params.push(`%${nombre}%`);
+        }
+
+        if (episodio) {
+            conditions.push('episodio LIKE ?');
+            params.push(`%${episodio}%`);
+        }
+
+        if (categoria && categoria !== 'todas') {
+            conditions.push('categoria LIKE ?');
+            params.push(`%${categoria}%`);
+        }
+
+        if (conditions.length > 0) {
+            query += ' WHERE ' + conditions.join(' AND ');
+        }
+
+        query += ' ORDER BY fecha DESC';
+
+        const [evaluaciones] = await pool.execute(query, params);
 
         // Preparar datos para la vista
         evaluaciones.forEach(e => {
@@ -133,6 +158,7 @@ router.get('/Historial', async (req, res) => {
 
         res.render('Historiales_Generales', {
             evaluaciones,
+            filtros: { nombre, episodio, categoria },
             csrfToken: req.csrfToken()
         });
     } catch (error) {

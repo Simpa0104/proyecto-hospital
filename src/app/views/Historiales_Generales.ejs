@@ -10,6 +10,49 @@
                 </a>
             </div>
 
+            <!-- Formulario de búsqueda avanzada -->
+            <form method="GET" action="/Historial" class="mb-4">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control"
+                            placeholder="Buscar por nombre..." value="<%= filtros.nombre %>">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="episodio" class="form-label">Episodio</label>
+                        <input type="text" id="episodio" name="episodio" class="form-control"
+                            placeholder="Buscar por episodio..." value="<%= filtros.episodio %>">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="categoria" class="form-label">Categoría</label>
+                        <select id="categoria" name="categoria" class="form-select">
+                            <option value="todas" <%=!filtros.categoria || filtros.categoria==='todas' ? 'selected' : ''
+                                %>>Todas las categorías</option>
+                            <option value="Psicológico" <%=filtros.categoria==='Psicológico' ? 'selected' : '' %>
+                                >Psicológico</option>
+                            <option value="Biológico" <%=filtros.categoria==='Biológico' ? 'selected' : '' %>>Biológico
+                            </option>
+                            <option value="Social" <%=filtros.categoria==='Social' ? 'selected' : '' %>>Social</option>
+                            <option value="Ninguno" <%=filtros.categoria==='Ninguno' ? 'selected' : '' %>>Ninguno
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-search"></i> Filtrar
+                        </button>
+                    </div>
+                </div>
+                <% if (filtros.nombre || filtros.episodio || (filtros.categoria && filtros.categoria !=='todas' )) { %>
+                    <div class="mt-2">
+                        <a href="/Historial" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-times"></i> Limpiar filtros
+                        </a>
+                    </div>
+                    <% } %>
+            </form>
+
             <% if (evaluaciones && evaluaciones.length> 0) { %>
                 <div class="row">
                     <% evaluaciones.forEach(paciente=> { %>

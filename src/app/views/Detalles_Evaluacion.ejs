@@ -1,124 +1,169 @@
 <%- include('../includes/head.ejs') %>
-<title>Detalles de Evaluación</title>
-<%- include('../includes/contacto.ejs') %>
+    <title>Detalles de Evaluación</title>
+    <%- include('../includes/contacto.ejs') %>
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Detalles de la Evaluación</h1>
-        <a href="/Historial" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> Volver al Historial
-        </a>
-    </div>
-
-    <div class="card shadow">
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <h4 class="card-title">
-                        <%= evaluacion.nombre %>
-                        <small class="text-muted">#<%= evaluacion.episodio %></small>
-                    </h4>
-                    <p class="text-muted">
-                        <i class="fas fa-calendar-alt"></i>
-                        <%= new Date(evaluacion.fecha).toLocaleDateString('es-ES') %>
-                    </p>
+        <div class="container mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Detalles de la Evaluación</h1>
+                <a href="/Historial" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Volver al Historial
+                </a>
+            </div>
+            <div class="container mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <button id="btnExportarPDF" class="btn btn-danger">
+                        <i class="fas fa-file-pdf"></i> Exportar a PDF
+                    </button>
                 </div>
-                <span class="badge <%= 
+
+
+                <div id="contenidoPDF" class="card shadow">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h4 class="card-title">
+                                    <%= evaluacion.nombre %>
+                                        <small class="text-muted">#<%= evaluacion.episodio %></small>
+                                </h4>
+                                <p class="text-muted">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <%= new Date(evaluacion.fecha).toLocaleDateString('es-ES') %>
+                                </p>
+                            </div>
+                            <span class="badge <%= 
                     categoriasArray.length > 1 ? 'bg-info' : 
                     categoriasArray.includes('Psicológico') ? 'bg-danger' :
                     categoriasArray.includes('Biológico') ? 'bg-warning' : 'bg-success'
                 %>">
-                    <%= categoriasArray.length > 0 ? categoriasArray.join(', ') : 'Ninguno' %>
-                </span>
-            </div>
+                                <%= categoriasArray.length> 0 ? categoriasArray.join(', ') : 'Ninguno' %>
+                            </span>
+                        </div>
 
-            <hr>
-            
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <h5>Riesgos Identificados:</h5>
-                    <ul class="list-group">
-                        <% if (categoriasArray.length === 0) { %>
-                            <li class="list-group-item text-success">
-                                <i class="fas fa-check-circle"></i> Ningún riesgo significativo
-                            </li>
-                        <% } else { %>
-                            <% categoriasArray.forEach(cat => { %>
-                                <li class="list-group-item <%= 
+                        <hr>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <h5>Riesgos Identificados:</h5>
+                                <ul class="list-group">
+                                    <% if (categoriasArray.length===0) { %>
+                                        <li class="list-group-item text-success">
+                                            <i class="fas fa-check-circle"></i> Ningún riesgo significativo
+                                        </li>
+                                        <% } else { %>
+                                            <% categoriasArray.forEach(cat=> { %>
+                                                <li class="list-group-item <%= 
                                     cat === 'Psicológico' ? 'list-group-item-danger' :
                                     cat === 'Biológico' ? 'list-group-item-warning' : 'list-group-item-info'
                                 %>">
-                                    <i class="fas fa-exclamation-triangle"></i> <%= cat %>
-                                </li>
-                            <% }); %>
-                        <% } %>
-                    </ul>
-                </div>
-                
-                <div class="col-md-6">
-                    <h5>Puntajes Detallados:</h5>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Categoría</th>
-                                    <th>Puntaje</th>
-                                    <th>Nivel</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Psicológico</td>
-                                    <td><%= evaluacion.psico %></td>
-                                    <td class="<%= evaluacion.psico >= 3 ? 'text-danger' : evaluacion.psico >= 2 ? 'text-warning' : 'text-success' %>">
-                                        <%= evaluacion.psico >= 3 ? 'Alto' : evaluacion.psico >= 2 ? 'Medio' : 'Bajo' %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Biológico</td>
-                                    <td><%= evaluacion.bio %></td>
-                                    <td class="<%= evaluacion.bio >= 6 ? 'text-danger' : evaluacion.bio >= 4 ? 'text-warning' : 'text-success' %>">
-                                        <%= evaluacion.bio >= 6 ? 'Alto' : evaluacion.bio >= 4 ? 'Medio' : 'Bajo' %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Social</td>
-                                    <td><%= evaluacion.social %></td>
-                                    <td class="<%= evaluacion.social >= 2 ? 'text-danger' : evaluacion.social >= 1 ? 'text-warning' : 'text-success' %>">
-                                        <%= evaluacion.social >= 2 ? 'Alto' : evaluacion.social >= 1 ? 'Medio' : 'Bajo' %>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                    <%= cat %>
+                                                </li>
+                                                <% }); %>
+                                                    <% } %>
+                                </ul>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h5>Puntajes Detallados:</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Categoría</th>
+                                                <th>Puntaje</th>
+                                                <th>Nivel</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Psicológico</td>
+                                                <td>
+                                                    <%= evaluacion.psico %>
+                                                </td>
+                                                <td
+                                                    class="<%= evaluacion.psico >= 3 ? 'text-danger' : evaluacion.psico >= 2 ? 'text-warning' : 'text-success' %>">
+                                                    <%= evaluacion.psico>= 3 ? 'Alto' : evaluacion.psico >= 2 ? 'Medio'
+                                                        :
+                                                        'Bajo' %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Biológico</td>
+                                                <td>
+                                                    <%= evaluacion.bio %>
+                                                </td>
+                                                <td
+                                                    class="<%= evaluacion.bio >= 6 ? 'text-danger' : evaluacion.bio >= 4 ? 'text-warning' : 'text-success' %>">
+                                                    <%= evaluacion.bio>= 6 ? 'Alto' : evaluacion.bio >= 4 ? 'Medio' :
+                                                        'Bajo'
+                                                        %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Social</td>
+                                                <td>
+                                                    <%= evaluacion.social %>
+                                                </td>
+                                                <td
+                                                    class="<%= evaluacion.social >= 2 ? 'text-danger' : evaluacion.social >= 1 ? 'text-warning' : 'text-success' %>">
+                                                    <%= evaluacion.social>= 2 ? 'Alto' : evaluacion.social >= 1 ?
+                                                        'Medio' :
+                                                        'Bajo' %>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h5>Recomendaciones:</h5>
+                            <div class="alert <%= 
+                    categoriasArray.length > 0 ? 'alert-warning' : 'alert-success'
+                %>">
+                                <% if (categoriasArray.length===0) { %>
+                                    <i class="fas fa-thumbs-up"></i> El paciente no requiere intervenciones especiales.
+                                    <% } else { %>
+                                        <i class="fas fa-exclamation-circle"></i> Considerar:
+                                        <ul class="mt-2">
+                                            <% if (categoriasArray.includes('Psicológico')) { %>
+                                                <li>Evaluación por psicología/psiquiatría</li>
+                                                <% } %>
+                                                    <% if (categoriasArray.includes('Biológico')) { %>
+                                                        <li>Monitorización médica intensiva</li>
+                                                        <% } %>
+                                                            <% if (categoriasArray.includes('Social')) { %>
+                                                                <li>Gestión con trabajo social</li>
+                                                                <% } %>
+                                        </ul>
+                                        <% } %>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-4">
-                <h5>Recomendaciones:</h5>
-                <div class="alert <%= 
-                    categoriasArray.length > 0 ? 'alert-warning' : 'alert-success'
-                %>">
-                    <% if (categoriasArray.length === 0) { %>
-                        <i class="fas fa-thumbs-up"></i> El paciente no requiere intervenciones especiales.
-                    <% } else { %>
-                        <i class="fas fa-exclamation-circle"></i> Considerar:
-                        <ul class="mt-2">
-                            <% if (categoriasArray.includes('Psicológico')) { %>
-                                <li>Evaluación por psicología/psiquiatría</li>
-                            <% } %>
-                            <% if (categoriasArray.includes('Biológico')) { %>
-                                <li>Monitorización médica intensiva</li>
-                            <% } %>
-                            <% if (categoriasArray.includes('Social')) { %>
-                                <li>Gestión con trabajo social</li>
-                            <% } %>
-                        </ul>
-                    <% } %>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            <script nonce="<%= nonce %>" src="/js/html2pdf.bundle.min.js"></script>
 
-<%- include('../includes/footer.ejs') %>
+            <script nonce="<%= nonce %>">
+                document.addEventListener("DOMContentLoaded", function () {
+                    const btn = document.getElementById("btnExportarPDF");
+                    btn.addEventListener("click", function () {
+                        console.log("Botón presionado");
+                        const elemento = document.getElementById('contenidoPDF');
+
+                        const opciones = {
+                            margin: 0.5,
+                            filename: 'evaluacion_<%= evaluacion.nombre.replace(/\s+/g, "_") %>.pdf',
+                            image: { type: 'jpeg', quality: 0.98 },
+                            html2canvas: { scale: 2 },
+                            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                        };
+
+                        html2pdf().set(opciones).from(elemento).save();
+                    });
+                });
+            </script>
+
+            <%- include('../includes/footer.ejs') %>
