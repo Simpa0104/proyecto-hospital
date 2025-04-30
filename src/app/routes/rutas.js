@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../../config/database');
 const { body, validationResult } = require('express-validator');
-
+const { Op } = require('sequelize');
+const Evaluacion = require('../../models/evaluacion');
 
 // Ruta principal
 router.get('/', (req, res) => {
     res.render('Inicio');
 });
+
+
 
 // Mostrar formulario
 router.get('/Cuestionario_Riesgos', (req, res) => {
@@ -16,7 +18,6 @@ router.get('/Cuestionario_Riesgos', (req, res) => {
     });
 });
 
-// Procesar evaluación
 // Procesar evaluación
 router.post('/Cuestionario_Niveles', [
     body('nombre')
@@ -34,19 +35,16 @@ router.post('/Cuestionario_Niveles', [
         const { nombre, episodio } = req.body;
         let psico = 0, bio = 0, social = 0;
 
-        // Verificar que todas las preguntas del 1 al 12 estén respondidas
         for (let i = 1; i <= 12; i++) {
             if (typeof req.body[`pregunta${i}`] === 'undefined') {
                 return res.status(400).json({ error: `Pregunta ${i} no fue respondida.` });
             }
         }
 
-        // Sumar respuestas del Nivel 1 (preguntas 1 a 6) → biológico
         for (let i = 1; i <= 6; i++) {
             bio += parseInt(req.body[`pregunta${i}`]) || 0;
         }
 
-        // Sumar respuestas del Nivel 2 (preguntas 7 a 12) → distribuido en psico, bio y social
         for (let i = 7; i <= 12; i++) {
             const valor = parseInt(req.body[`pregunta${i}`]) || 0;
             if (i <= 8) psico += valor;
@@ -54,12 +52,10 @@ router.post('/Cuestionario_Niveles', [
             else social += valor;
         }
 
-        // Umbrales de riesgo
         const umbralPsico = 0.35 * 8;
         const umbralBio = 0.35 * 16;
         const umbralSocial = 0.35 * 4;
 
-        // Determinar categorías con riesgo
         const categoriasRiesgo = [];
         if (psico >= umbralPsico) categoriasRiesgo.push("Psicológico");
         if (bio >= umbralBio) categoriasRiesgo.push("Biológico");
@@ -67,110 +63,84 @@ router.post('/Cuestionario_Niveles', [
 
         const categoriaTexto = categoriasRiesgo.length > 0 ? categoriasRiesgo.join(', ') : 'Ninguno';
 
-        // Guardar en la base de datos
-        const [result] = await pool.execute(
-            `INSERT INTO evaluaciones 
-             (nombre, episodio, fecha, categoria, psico, bio, social) 
-             VALUES (?, ?, CURDATE(), ?, ?, ?, ?)`,
-            [nombre, episodio, categoriaTexto, psico, bio, social]
-        );
+        const nueva = await Evaluacion.create({
+            nombre,
+            episodio,
+            fecha: new Date(),
+            categoria: categoriaTexto,
+            psico,
+            bio,
+            social
+        });
 
-        // Enviar respuesta exitosa
         res.json({
             success: true,
-            nextUrl: `/Detalles_Evaluacion/${result.insertId}`
+            nextUrl: `/Detalles_Evaluacion/${nueva.id}`
         });
-        return;
 
     } catch (error) {
         console.error('Error en formulario combinado:', error);
         res.status(500).json({ error: 'Error del servidor' });
-        return;
     }
 });
 
 // Mostrar detalles
 router.get('/Detalles_Evaluacion/:id', async (req, res) => {
     try {
-        const [evaluacion] = await pool.execute(
-            'SELECT * FROM evaluaciones WHERE id = ?',
-            [req.params.id]
-        );
+        const evaluacion = await Evaluacion.findByPk(req.params.id);
 
-        if (evaluacion.length === 0) {
+        if (!evaluacion) {
             return res.status(404).render('error', {
                 mensaje: 'Evaluación no encontrada',
                 error: {}
             });
         }
 
-        // Convertir el texto de categoría a array
-        const categoriasArray = evaluacion[0].categoria !== 'Ninguno' ?
-            evaluacion[0].categoria.split(', ') : [];
+        const categoriasArray = evaluacion.categoria !== 'Ninguno'
+            ? evaluacion.categoria.split(', ')
+            : [];
 
         res.render('Detalles_Evaluacion', {
-            evaluacion: evaluacion[0],
+            evaluacion,
             categoriasArray
         });
+
     } catch (error) {
         console.error(error);
         res.status(500).render('error', { mensaje: 'Error del servidor' });
     }
 });
 
-// Mostrar historial con paginación
+// Historial con paginación y filtros
 router.get('/Historial', async (req, res) => {
     try {
         const { nombre, episodio, categoria, pagina = 1 } = req.query;
-        const porPagina = 10; // Número de resultados por página
+        const porPagina = 10;
         const offset = (pagina - 1) * porPagina;
 
-        let query = 'SELECT * FROM evaluaciones';
-        let countQuery = 'SELECT COUNT(*) AS total FROM evaluaciones';
-        let conditions = [];
-        let params = [];
-
-        if (nombre) {
-            conditions.push('nombre LIKE ?');
-            params.push(`%${nombre}%`);
-        }
-
-        if (episodio) {
-            conditions.push('episodio LIKE ?');
-            params.push(`%${episodio}%`);
-        }
-
+        let where = {};
+        if (nombre) where.nombre = { [Op.like]: `%${nombre}%` };
+        if (episodio) where.episodio = { [Op.like]: `%${episodio}%` };
         if (categoria && categoria !== 'todas') {
-            conditions.push('categoria LIKE ?');
-            params.push(`%${categoria}%`);
+            where.categoria = { [Op.like]: `%${categoria}%` };
         }
 
-        if (conditions.length > 0) {
-            const whereClause = ' WHERE ' + conditions.join(' AND ');
-            query += whereClause;
-            countQuery += whereClause;
-        }
+        const { count, rows } = await Evaluacion.findAndCountAll({
+            where,
+            order: [['fecha', 'DESC']],
+            limit: porPagina,
+            offset
+        });
 
-        query += ' ORDER BY fecha DESC LIMIT ? OFFSET ?';
-
-        // Ejecutar consulta para obtener los datos paginados
-        const [evaluaciones] = await pool.execute(
-            query,
-            [...params, porPagina.toString(), offset.toString()]
-        );
-
-        // Obtener el total de registros para calcular el número de páginas
-        const [[{ total }]] = await pool.execute(countQuery, params);
-        const totalPaginas = Math.ceil(total / porPagina);
-
-        // Preparar datos para la vista
-        evaluaciones.forEach(e => {
-            e.categoriasArray = e.categoria !== 'Ninguno' ?
-                e.categoria.split(', ') : [];
+        const totalPaginas = Math.ceil(count / porPagina);
+        rows.forEach(e => {
+            e.categoriasArray = e.categoria !== 'Ninguno'
+                ? e.categoria.split(', ')
+                : [];
         });
 
         res.render('Historiales_Generales', {
-            evaluaciones,
+            evaluaciones: rows,
             filtros: { nombre, episodio, categoria },
             paginacion: {
                 paginaActual: parseInt(pagina),
@@ -180,6 +150,7 @@ router.get('/Historial', async (req, res) => {
             },
             csrfToken: req.csrfToken()
         });
+
     } catch (error) {
         console.error(error);
         res.status(500).render('error', { mensaje: 'Error del servidor' });
@@ -189,20 +160,19 @@ router.get('/Historial', async (req, res) => {
 // Eliminar evaluación
 router.post('/eliminar-evaluacion/:id', async (req, res) => {
     try {
-        const [result] = await pool.execute(
-            'DELETE FROM evaluaciones WHERE id = ?',
-            [req.params.id]
-        );
+        const eliminado = await Evaluacion.destroy({
+            where: { id: req.params.id }
+        });
 
-        if (result.affectedRows === 0) {
+        if (!eliminado) {
             return res.status(404).json({
                 success: false,
-                message: "Evaluación no encontrada",
-                error: {}
+                message: "Evaluación no encontrada"
             });
         }
 
         res.json({ success: true });
+
     } catch (error) {
         console.error("Error eliminando:", error);
         res.status(500).json({ success: false, message: "Error del servidor" });

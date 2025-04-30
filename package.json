@@ -32,7 +32,8 @@
     "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
     "html2pdf.js": "^0.10.3",
-    "mysql2": "^3.13.0"
+    "mysql2": "^3.13.0",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
