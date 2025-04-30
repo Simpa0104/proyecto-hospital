@@ -9,6 +9,8 @@ router.get('/', (req, res) => {
     res.render('Inicio');
 });
 
+
+
 // Mostrar formulario
 router.get('/Cuestionario_Riesgos', (req, res) => {
     res.render('Cuestionario_Combinados', {
