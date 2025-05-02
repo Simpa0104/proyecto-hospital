@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../../src/config/server');
 const pool = require('../../src/config/database');
+const { describe, test, expect } = require('@jest/globals');
 
 describe('Pruebas de validación de datos', () => {
     test('Debe rechazar un POST a /Cuestionario_Niveles sin nombre ni episodio', async () => {
