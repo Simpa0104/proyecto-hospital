@@ -30,7 +30,7 @@ describe('Pruebas de contenido en vistas EJS', () => {
   });
 
   it('Carga detalles de una evaluación existente (requiere ID válido)', () => {
-    const idEvaluacion = 1;
+    const idEvaluacion = 10;
     cy.visit(`/Detalles_Evaluacion/${idEvaluacion}`);
     cy.contains('Detalles de la Evaluación').should('exist');
     cy.get('table').should('exist');

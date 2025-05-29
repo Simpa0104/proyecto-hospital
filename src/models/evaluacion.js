@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-
 const Evaluacion = sequelize.define('Evaluacion', {
     id: {
         type: DataTypes.INTEGER,
@@ -9,7 +8,10 @@ const Evaluacion = sequelize.define('Evaluacion', {
     },
     nombre: {
         type: DataTypes.STRING(255),
-        allowNull: false
+        allowNull: false,
+        validate: {
+            is: /^[a-zA-Z\s]+$/i // Validación contra números
+        }
     },
     episodio: {
         type: DataTypes.INTEGER,
@@ -40,5 +42,4 @@ const Evaluacion = sequelize.define('Evaluacion', {
     tableName: 'evaluaciones',
     timestamps: false
 });
-
 module.exports = Evaluacion;
