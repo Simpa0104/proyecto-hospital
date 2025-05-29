@@ -66,3 +66,4 @@ describe('🔍 Pruebas directas de Base de Datos (MySQL) con Sequelize', () => {
         expect(eliminados).toBe(1);
     });
 });
+// Pruebas de bases de datos
