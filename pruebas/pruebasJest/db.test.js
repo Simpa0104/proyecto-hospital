@@ -1,6 +1,6 @@
 const { Evaluacion, sequelize } = require('../../src/models');
 
-describe('🔍 Pruebas directas de Base de Datos (MySQL) con Sequelize', () => {
+describe('Pruebas directas de Base de Datos (MySQL) con Sequelize', () => {
     let evaluacionId;
 
     beforeAll(async () => {
@@ -11,6 +11,7 @@ describe('🔍 Pruebas directas de Base de Datos (MySQL) con Sequelize', () => {
         await sequelize.close();
     });
 
+    //1. Prueba de insecion de una evaluacion valida
     test('Inserta evaluación válida', async () => {
         const evaluacion = await Evaluacion.create({
             nombre: 'Paciente BD',
@@ -27,6 +28,7 @@ describe('🔍 Pruebas directas de Base de Datos (MySQL) con Sequelize', () => {
         expect(evaluacion.id).toBeDefined();
     });
 
+    //2. Prueba donde debe de fallar al insertar una evaluacion con un nombre invalido
     test('Falla al insertar evaluación con nombre inválido', async () => {
         await expect(
             Evaluacion.create({
@@ -41,6 +43,7 @@ describe('🔍 Pruebas directas de Base de Datos (MySQL) con Sequelize', () => {
         ).rejects.toThrow();
     });
 
+    //3. Prueba donde busca una evaluacion por el nombre
     test('Busca evaluación por nombre', async () => {
         const resultados = await Evaluacion.findAll({
             where: { nombre: 'Paciente BD' }
@@ -49,6 +52,7 @@ describe('🔍 Pruebas directas de Base de Datos (MySQL) con Sequelize', () => {
         expect(resultados[0].categoria).toBe('Psicológico');
     });
 
+    //4. Prueba donde se actualiza una evaluacion
     test('Actualiza evaluación', async () => {
         const evaluacion = await Evaluacion.findByPk(evaluacionId);
         evaluacion.psico = 4;
@@ -58,6 +62,7 @@ describe('🔍 Pruebas directas de Base de Datos (MySQL) con Sequelize', () => {
         expect(actualizado.psico).toBe(4);
     });
 
+    //5. Prueba donde se elimina una evaluacion
     test('Elimina evaluación', async () => {
         const eliminados = await Evaluacion.destroy({
             where: { id: evaluacionId }

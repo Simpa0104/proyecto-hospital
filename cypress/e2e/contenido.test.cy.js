@@ -1,3 +1,5 @@
+//18. Pruebas de contenido con Cypress
+
 describe('Pruebas de contenido en vistas EJS', () => {
   beforeEach(() => {
     cy.visit('/');

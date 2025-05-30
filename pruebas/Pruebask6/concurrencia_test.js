@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { check } from 'k6';
 
+//16. Prueba de concurrencia
 export let options = {
     stages: [
         { duration: '10s', target: 20 },

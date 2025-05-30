@@ -1,6 +1,8 @@
 const { getCSRFToken } = require('./helpers/csrfClient');
 
 describe('Pruebas de Seguridad con CSRF real', () => {
+
+    //13. Prueba donde se debe de rechazar una solicitud SQL Injection
     test('Rechaza SQL Injection (nombre = "\' OR 1=1 --")', async () => {
         const { agent, csrfToken, cookies } = await getCSRFToken();
 
@@ -21,6 +23,7 @@ describe('Pruebas de Seguridad con CSRF real', () => {
         expect(res.body.errors).toBeDefined();
     });
 
+    //14. Prueba donde se debe de rechazar una solicitud XSS
     test('Rechaza XSS (nombre con <script>)', async () => {
         const { agent, csrfToken, cookies } = await getCSRFToken();
 

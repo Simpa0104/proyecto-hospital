@@ -53,6 +53,8 @@ afterAll(async () => {
 });
 
 describe('CRUD con Sequelize y SQLite (modo local)', () => {
+
+    //6. Prueba donde se crea una evaluacion valida
     test('Crear evaluación válida', async () => {
         const evaluacion = await TestEvaluacion.create({
             nombre: 'Paciente Uno',
@@ -68,6 +70,7 @@ describe('CRUD con Sequelize y SQLite (modo local)', () => {
         expect(evaluacion.nombre).toBe('Paciente Uno');
     });
 
+    //7. Prueba donde falla al crear una evaluación con nombre inválido (números)
     test('Falla al crear evaluación con nombre inválido (números)', async () => {
         await expect(TestEvaluacion.create({
             nombre: 'Juan123',
@@ -80,11 +83,13 @@ describe('CRUD con Sequelize y SQLite (modo local)', () => {
         })).rejects.toThrow();
     });
 
+    //8. Prueba donde se busca una evaluación por nombre
     test('Leer todas las evaluaciones', async () => {
         const registros = await TestEvaluacion.findAll();
         expect(registros.length).toBeGreaterThan(0);
     });
 
+    //9. Prueba donde se busca una evaluación por ID
     test('Leer una evaluación por ID', async () => {
         const nueva = await TestEvaluacion.create({
             nombre: 'Paciente Dos',
@@ -100,6 +105,7 @@ describe('CRUD con Sequelize y SQLite (modo local)', () => {
         expect(encontrada.nombre).toBe('Paciente Dos');
     });
 
+    //10. Prueba donde se actualiza una evaluación existente
     test('Actualizar evaluación existente', async () => {
         const evaluacion = await TestEvaluacion.create({
             nombre: 'Paciente Editar',
@@ -118,6 +124,7 @@ describe('CRUD con Sequelize y SQLite (modo local)', () => {
         expect(actualizada.categoria).toBe('Psicológico');
     });
 
+    //11. Prueba donde se elimina una evaluacion
     test('Eliminar evaluación', async () => {
         const evaluacion = await TestEvaluacion.create({
             nombre: 'Paciente Eliminar',
@@ -136,6 +143,7 @@ describe('CRUD con Sequelize y SQLite (modo local)', () => {
         expect(eliminado).toBeNull();
     });
 
+    //12. Prueba de filtro por nombre
     test('Filtro por nombre', async () => {
         await TestEvaluacion.create({
             nombre: 'BuscarNombre',

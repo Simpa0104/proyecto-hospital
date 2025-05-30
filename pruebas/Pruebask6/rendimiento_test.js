@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
+//17. Prueba de rendimiento
 export let options = {
   vus: 50,
   duration: '30s',

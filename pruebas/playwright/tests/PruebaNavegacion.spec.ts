@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 
+//15. Prueba de navegacion
 test('test', async ({ page }) => {
     await page.goto('http://localhost:3000/');
     await page.getByRole('link', { name: 'Ir al test' }).click();
